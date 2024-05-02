@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8081") // Allow requests from frontend URL
 public class EmployeeController {
 
     private final EmployeeRepository repository;
@@ -18,8 +19,10 @@ public class EmployeeController {
     /* curl sample :
     curl -i localhost:8080/employees
     */
+
     @GetMapping("/employees")
     List<Employee> all(){
+        System.out.println("Test");
         return repository.findAll();
     }
 
