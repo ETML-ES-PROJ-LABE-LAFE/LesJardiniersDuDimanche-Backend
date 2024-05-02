@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081") // Allow requests from frontend URL
-//cucu
+//cucu22
 public class EmployeeController {
 
     private final EmployeeRepository repository;
