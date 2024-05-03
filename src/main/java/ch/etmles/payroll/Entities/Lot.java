@@ -18,16 +18,19 @@ public class Lot {
     private Double prixDepart; // Attribut pour le prix de départ
     private @Temporal(TemporalType.TIMESTAMP) Date dateHeureDebut; // Date et heure de début avec annotation pour JPA
     private @Temporal(TemporalType.TIMESTAMP) Date dateHeureFin; // Date et heure de fin avec annotation pour JPA
+    private Categorie categorie;
 
     public Lot() {}
 
-    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin) {
+    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin, Categorie categorie) {
         this.setNom(nom);
         this.setDescription(description);
         this.setPrixDepart(prixDepart);
         this.setDateHeureDebut(dateHeureDebut);
         this.setDateHeureFin(dateHeureFin);
+        this.setCategorie(categorie);
     }
+
 
     public Long getID() {
         return this.id;
@@ -77,18 +80,27 @@ public class Lot {
         this.dateHeureFin = dateHeureFin;
     }
 
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Lot lot)) return false;
-        return Objects.equals(this.id, lot.id) && Objects.equals(this.nom, lot.nom)
-                && Objects.equals(this.description, lot.description) && Objects.equals(this.prixDepart, lot.prixDepart)
-                && Objects.equals(this.dateHeureDebut, lot.dateHeureDebut) && Objects.equals(this.dateHeureFin, lot.dateHeureFin);
+        return Objects.equals(id, lot.id) && Objects.equals(nom, lot.nom)
+                && Objects.equals(description, lot.description) && Objects.equals(prixDepart, lot.prixDepart)
+                && Objects.equals(dateHeureDebut, lot.dateHeureDebut) && Objects.equals(dateHeureFin, lot.dateHeureFin)
+                && categorie == lot.categorie;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.nom, this.description, this.prixDepart, this.dateHeureDebut, this.dateHeureFin);
+        return Objects.hash(id, nom, description, prixDepart, dateHeureDebut, dateHeureFin, categorie);
     }
 
     @Override
@@ -100,6 +112,7 @@ public class Lot {
                 ", prixDepart=" + prixDepart +
                 ", dateHeureDebut=" + dateHeureDebut +
                 ", dateHeureFin=" + dateHeureFin +
+                ", categorie=" + categorie +
                 '}';
     }
 }
