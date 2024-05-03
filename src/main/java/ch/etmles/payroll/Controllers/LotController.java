@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081") // Allow requests from frontend URL
-//cucu22
+
 public class LotController {
 
     private final LotRepository repository;
