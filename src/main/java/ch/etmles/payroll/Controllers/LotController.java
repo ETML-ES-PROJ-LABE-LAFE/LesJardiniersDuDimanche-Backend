@@ -21,7 +21,7 @@ public class LotController {
     curl -i localhost:8080/employees
     */
 
-    @GetMapping("/employees")
+    @GetMapping("/lots")
     List<Lot> all(){
         System.out.println("Test");
         return repository.findAll();
@@ -32,7 +32,7 @@ public class LotController {
         -H "Content-type:application/json" ^
         -d "{\"name\": \"Russel George\", \"role\": \"gardener\"}"
     */
-    @PostMapping("/employees")
+    @PostMapping("/lots")
     Lot newEmployee(@RequestBody Lot newLot){
         return repository.save(newLot);
     }
@@ -40,7 +40,7 @@ public class LotController {
     /* curl sample :
     curl -i localhost:8080/employees/1
     */
-    @GetMapping("/employees/{id}")
+    @GetMapping("/lots/{id}")
     Lot one(@PathVariable Long id){
         return repository.findById(id)
                 .orElseThrow(() -> new LotNotFoundException(id));
@@ -51,7 +51,7 @@ public class LotController {
         -H "Content-type:application/json" ^
         -d "{\"name\": \"Samwise Bing\", \"role\": \"peer-to-peer\"}"
      */
-    @PutMapping("/employees/{id}")
+    @PutMapping("/lots/{id}")
     Lot replaceEmployee(@RequestBody Lot newLot, @PathVariable Long id) {
         return repository.findById(id)
                 .map(lot -> {
@@ -68,7 +68,7 @@ public class LotController {
     /* curl sample :
     curl -i -X DELETE localhost:8080/employees/2
     */
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("/lots/{id}")
     void deleteEmployee(@PathVariable Long id){
         repository.deleteById(id);
     }
