@@ -1,7 +1,7 @@
 package ch.etmles.payroll.Controllers;
 
-import ch.etmles.payroll.Entities.Employee;
-import ch.etmles.payroll.Repositories.EmployeeRepository;
+import ch.etmles.payroll.Entities.Lot;
+import ch.etmles.payroll.Repositories.LotRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,11 +9,11 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:8081") // Allow requests from frontend URL
 //cucu22
-public class EmployeeController {
+public class LotController {
 
-    private final EmployeeRepository repository;
+    private final LotRepository repository;
 
-    EmployeeController(EmployeeRepository repository){
+    LotController(LotRepository repository){
         this.repository = repository;
     }
 
@@ -22,7 +22,7 @@ public class EmployeeController {
     */
 
     @GetMapping("/employees")
-    List<Employee> all(){
+    List<Lot> all(){
         System.out.println("Test");
         return repository.findAll();
     }
@@ -33,17 +33,17 @@ public class EmployeeController {
         -d "{\"name\": \"Russel George\", \"role\": \"gardener\"}"
     */
     @PostMapping("/employees")
-    Employee newEmployee(@RequestBody Employee newEmployee){
-        return repository.save(newEmployee);
+    Lot newEmployee(@RequestBody Lot newLot){
+        return repository.save(newLot);
     }
 
     /* curl sample :
     curl -i localhost:8080/employees/1
     */
     @GetMapping("/employees/{id}")
-    Employee one(@PathVariable Long id){
+    Lot one(@PathVariable Long id){
         return repository.findById(id)
-                .orElseThrow(() -> new EmployeeNotFoundException(id));
+                .orElseThrow(() -> new LotNotFoundException(id));
     }
 
     /* curl sample :
@@ -52,16 +52,16 @@ public class EmployeeController {
         -d "{\"name\": \"Samwise Bing\", \"role\": \"peer-to-peer\"}"
      */
     @PutMapping("/employees/{id}")
-    Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
+    Lot replaceEmployee(@RequestBody Lot newLot, @PathVariable Long id) {
         return repository.findById(id)
-                .map(employee -> {
-                    employee.setName(newEmployee.getName());
-                    employee.setRole(newEmployee.getRole());
-                    return repository.save(employee);
+                .map(lot -> {
+                    lot.setNom(newLot.getNom());
+                    lot.setDescription(newLot.getDescription());
+                    return repository.save(lot);
                 })
                 .orElseGet(() -> {
-                    newEmployee.setId(id);
-                    return repository.save(newEmployee);
+                    newLot.setId(id);
+                    return repository.save(newLot);
                 });
     }
 
