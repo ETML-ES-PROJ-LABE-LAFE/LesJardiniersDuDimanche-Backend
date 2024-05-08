@@ -1,10 +1,6 @@
 package ch.etmles.payroll.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
@@ -18,17 +14,18 @@ public class Lot {
     private Double prixDepart; // Attribut pour le prix de départ
     private @Temporal(TemporalType.TIMESTAMP) Date dateHeureDebut; // Date et heure de début avec annotation pour JPA
     private @Temporal(TemporalType.TIMESTAMP) Date dateHeureFin; // Date et heure de fin avec annotation pour JPA
-    private Categorie categorie;
+    @ManyToOne
+    private Category category;
 
     public Lot() {}
 
-    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin, Categorie categorie) {
+    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin, Category category) {
         this.setNom(nom);
         this.setDescription(description);
         this.setPrixDepart(prixDepart);
         this.setDateHeureDebut(dateHeureDebut);
         this.setDateHeureFin(dateHeureFin);
-        this.setCategorie(categorie);
+        this.setCategory(category);
     }
 
 
@@ -80,12 +77,12 @@ public class Lot {
         this.dateHeureFin = dateHeureFin;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -95,12 +92,12 @@ public class Lot {
         return Objects.equals(id, lot.id) && Objects.equals(nom, lot.nom)
                 && Objects.equals(description, lot.description) && Objects.equals(prixDepart, lot.prixDepart)
                 && Objects.equals(dateHeureDebut, lot.dateHeureDebut) && Objects.equals(dateHeureFin, lot.dateHeureFin)
-                && categorie == lot.categorie;
+                && category == lot.category;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nom, description, prixDepart, dateHeureDebut, dateHeureFin, categorie);
+        return Objects.hash(id, nom, description, prixDepart, dateHeureDebut, dateHeureFin, category);
     }
 
     @Override
@@ -112,7 +109,7 @@ public class Lot {
                 ", prixDepart=" + prixDepart +
                 ", dateHeureDebut=" + dateHeureDebut +
                 ", dateHeureFin=" + dateHeureFin +
-                ", categorie=" + categorie +
+                ", categorie=" + category +
                 '}';
     }
 }
