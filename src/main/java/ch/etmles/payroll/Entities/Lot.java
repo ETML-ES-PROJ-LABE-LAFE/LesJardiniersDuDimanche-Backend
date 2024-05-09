@@ -16,16 +16,19 @@ public class Lot {
     private @Temporal(TemporalType.TIMESTAMP) Date dateHeureFin; // Date et heure de fin avec annotation pour JPA
     @ManyToOne
     private Category category;
+    @ManyToOne
+    private Category souscategory;
 
     public Lot() {}
 
-    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin, Category category) {
+    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin, Category category, Category souscategory) {
         this.setNom(nom);
         this.setDescription(description);
         this.setPrixDepart(prixDepart);
         this.setDateHeureDebut(dateHeureDebut);
         this.setDateHeureFin(dateHeureFin);
         this.setCategory(category);
+        this.souscategory = souscategory;
     }
 
 
@@ -85,6 +88,14 @@ public class Lot {
         this.category = category;
     }
 
+    public Category getSousCategory() {
+        return souscategory;
+    }
+
+    public void setSousCategory(Category souscategory) {
+        this.souscategory = souscategory;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,12 +103,12 @@ public class Lot {
         return Objects.equals(id, lot.id) && Objects.equals(nom, lot.nom)
                 && Objects.equals(description, lot.description) && Objects.equals(prixDepart, lot.prixDepart)
                 && Objects.equals(dateHeureDebut, lot.dateHeureDebut) && Objects.equals(dateHeureFin, lot.dateHeureFin)
-                && category == lot.category;
+                && category == lot.category && souscategory == lot.souscategory;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nom, description, prixDepart, dateHeureDebut, dateHeureFin, category);
+        return Objects.hash(id, nom, description, prixDepart, dateHeureDebut, dateHeureFin, category, souscategory) ;
     }
 
     @Override
@@ -110,6 +121,7 @@ public class Lot {
                 ", dateHeureDebut=" + dateHeureDebut +
                 ", dateHeureFin=" + dateHeureFin +
                 ", categorie=" + category +
+                ", souscategory=" + souscategory +
                 '}';
     }
 }
