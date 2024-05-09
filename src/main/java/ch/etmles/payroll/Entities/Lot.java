@@ -28,7 +28,7 @@ public class Lot {
         this.setDateHeureDebut(dateHeureDebut);
         this.setDateHeureFin(dateHeureFin);
         this.setCategory(category);
-        this.souscategory = souscategory;
+        this.setSousCategory(souscategory);
     }
 
 

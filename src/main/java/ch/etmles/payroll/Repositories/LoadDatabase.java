@@ -28,8 +28,8 @@ public class LoadDatabase {
                 Category subCategory2 = categoryRepository.save(new Category("Tondeuse", mainCategory2));
 
                 //Créer et sauvegarder des lots
-                Lot lot1 = new Lot("PC HP", "PC HP très très rapide", 1000.00, sdf.parse("2023-01-01T09:00:00"), sdf.parse("2023-01-01T21:00:00"), subCategory1);
-                Lot lot2 = new Lot("Tondeuse", "Tondeuse qui tondeuse bien", 1500.00, sdf.parse("2023-01-02T09:00:00"), sdf.parse("2023-01-02T21:00:00"),subCategory2);
+                Lot lot1 = new Lot("PC HP", "PC HP très très rapide", 1000.00, sdf.parse("2023-01-01T09:00:00"), sdf.parse("2023-01-01T21:00:00"),mainCategory1, subCategory1);
+                Lot lot2 = new Lot("Tondeuse", "Tondeuse qui tondeuse bien", 1500.00, sdf.parse("2023-01-02T09:00:00"), sdf.parse("2023-01-02T21:00:00"),mainCategory2,subCategory2 );
 
                 log.info("Preloading " + repository.save(lot1));
                 log.info("Preloading " + repository.save(lot2));
