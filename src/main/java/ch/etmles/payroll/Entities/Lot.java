@@ -1,3 +1,5 @@
+//Dossier Entities / Fichier Lot
+
 package ch.etmles.payroll.Entities;
 
 import jakarta.persistence.*;

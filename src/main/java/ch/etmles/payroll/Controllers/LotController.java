@@ -1,6 +1,8 @@
 package ch.etmles.payroll.Controllers;
 
+import ch.etmles.payroll.Entities.Category;
 import ch.etmles.payroll.Entities.Lot;
+import ch.etmles.payroll.Repositories.CategoryRepository;
 import ch.etmles.payroll.Repositories.LotRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +14,11 @@ import java.util.List;
 public class LotController {
 
     private final LotRepository repository;
+    private final CategoryRepository categoryRepository;
 
-    LotController(LotRepository repository){
+    LotController(LotRepository repository, CategoryRepository categoryRepository){
         this.repository = repository;
+        this.categoryRepository = categoryRepository;
     }
 
     /* curl sample :
@@ -33,7 +37,7 @@ public class LotController {
         -d "{\"name\": \"Russel George\", \"role\": \"gardener\"}"
     */
     @PostMapping("/lots")
-    Lot newEmployee(@RequestBody Lot newLot){
+    Lot newLot(@RequestBody Lot newLot){
         return repository.save(newLot);
     }
 
@@ -52,7 +56,7 @@ public class LotController {
         -d "{\"name\": \"Samwise Bing\", \"role\": \"peer-to-peer\"}"
      */
     @PutMapping("/lots/{id}")
-    Lot replaceEmployee(@RequestBody Lot newLot, @PathVariable Long id) {
+    Lot replaceLot(@RequestBody Lot newLot, @PathVariable Long id) {
         return repository.findById(id)
                 .map(lot -> {
                     lot.setNom(newLot.getNom());
@@ -69,7 +73,16 @@ public class LotController {
     curl -i -X DELETE localhost:8080/employees/2
     */
     @DeleteMapping("/lots/{id}")
-    void deleteEmployee(@PathVariable Long id){
+    void deleteLot(@PathVariable Long id){
         repository.deleteById(id);
     }
+
+     // Nouvelle route pour obtenir les lots par catégorie
+    @GetMapping("/lots/category/{categoryId}")
+    public List<Lot> getByCategory(@PathVariable Long categoryId) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new CategoryNotFoundException(categoryId));
+        return repository.findByCategory(category);
+    }
+
 }
