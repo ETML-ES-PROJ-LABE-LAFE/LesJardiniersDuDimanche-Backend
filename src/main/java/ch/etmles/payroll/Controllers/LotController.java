@@ -85,4 +85,10 @@ public class LotController {
         return repository.findByCategory(category);
     }
 
+    @GetMapping("/lots/subcategory/{subCategoryId}")
+    public List<Lot> getBySubCategory(@PathVariable Long subCategoryId) {
+        return repository.findBySouscategory_Id(subCategoryId);
+    }
+
+
 }
