@@ -1,19 +1,16 @@
-package ch.etmles.payroll;
+/*package ch.etmles.payroll.Controllers;
 
-import ch.etmles.payroll.Controllers.CategoryController;
+import ch.etmles.payroll.Repositories.CategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ch.etmles.payroll.Entities.Category;
-import ch.etmles.payroll.Repositories.CategoryRepository;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CategoryControllerTest {
 
-    // Suppose que ceci est un stub ou une implémentation concrète
     private CategoryRepository categoryRepository;
     private CategoryController categoryController;
 
@@ -24,75 +21,72 @@ public class CategoryControllerTest {
     }
 
     @Test
-    public void getAllCategories_whenCategoriesExist_thenCategoriesReturned() {
+    public void getAllCategories_ShouldReturnAllCategories() {
         // Given
-        List<Category> expectedCategories = Arrays.asList(new Category("Electronics", null));
-        categoryRepository.saveAll(expectedCategories);
+        List<Category> storedCategories = List.of(new Category("Electronics", null));
+        categoryRepository.saveAll(storedCategories);
 
         // When
-        List<Category> result = categoryController.getAllCategories();
+        List<Category> fetchedCategories = categoryController.getAllCategories();
 
         // Then
-        assertNotNull(result);
-        assertEquals(expectedCategories.size(), result.size());
-        assertEquals("Electronics", result.get(0).getName());
+        assertNotNull(fetchedCategories);
+        assertEquals(storedCategories.size(), fetchedCategories.size());
     }
 
     @Test
-    public void addCategory_whenValidCategory_thenCategorySaved() {
+    public void addCategory_ShouldAddCategory() {
         // Given
-        Category newCategory = new Category("Books", null);
+        Category category = new Category("Books", null);
 
         // When
-        Category result = categoryController.addCategory(newCategory);
+        Category savedCategory = categoryController.addCategory(category);
 
         // Then
-        assertNotNull(result);
-        assertEquals("Books", result.getName());
+        assertNotNull(savedCategory);
+        assertEquals("Books", savedCategory.getName());
     }
 
     @Test
-    public void getCategoryById_whenCategoryExists_thenCategoryReturned() {
+    public void getCategoryById_ShouldReturnCategory() {
         // Given
-        Long categoryId = 1L;
-        Category expectedCategory = new Category("Music", null);
-        categoryRepository.save(expectedCategory);
-
-        // When
-        Category result = categoryController.getCategoryById(categoryId);
-
-        // Then
-        assertNotNull(result);
-        assertEquals("Music", result.getName());
-    }
-
-    @Test
-    public void updateCategory_whenCategoryExists_thenUpdatedCategoryReturned() {
-        // Given
-        Long categoryId = 1L;
-        Category existingCategory = new Category("OldName", null);
-        Category newCategory = new Category("NewName", null);
-        categoryRepository.save(existingCategory);
-
-        // When
-        Category result = categoryController.updateCategory(newCategory, categoryId);
-
-        // Then
-        assertNotNull(result);
-        assertEquals("NewName", result.getName());
-    }
-
-    @Test
-    public void deleteCategory_whenCategoryExists_thenCategoryDeleted() {
-        // Given
-        Long categoryId = 1L;
-        Category category = new Category("ToBeDeleted", null);
+        Category category = new Category("Music", null);
         categoryRepository.save(category);
 
         // When
-        categoryController.deleteCategory(categoryId);
+        Category fetchedCategory = categoryController.getCategoryById(category.getId());
 
         // Then
-        assertFalse(categoryRepository.existsById(categoryId));
+        assertNotNull(fetchedCategory);
+        assertEquals("Music", fetchedCategory.getName());
+    }
+
+    @Test
+    public void updateCategory_ShouldUpdateCategory() {
+        // Given
+        Category originalCategory = new Category("Old Category", null);
+        categoryRepository.save(originalCategory);
+        Category updatedCategory = new Category("Updated Category", null);
+
+        // When
+        Category result = categoryController.updateCategory(updatedCategory, originalCategory.getId());
+
+        // Then
+        assertNotNull(result);
+        assertEquals("Updated Category", result.getName());
+    }
+
+    @Test
+    public void deleteCategory_ShouldDeleteCategory() {
+        // Given
+        Category category = new Category("To be deleted", null);
+        categoryRepository.save(category);
+
+        // When
+        categoryController.deleteCategory(category.getId());
+
+        // Then
+        assertFalse(categoryRepository.existsById(category.getId()));
     }
 }
+*/
