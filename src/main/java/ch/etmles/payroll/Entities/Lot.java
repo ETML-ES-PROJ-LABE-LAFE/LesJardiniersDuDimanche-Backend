@@ -10,6 +10,7 @@ import java.util.Objects;
 @Entity
 public class Lot {
 
+    //TODO remove french content
     private @Id @GeneratedValue Long id;
     private String nom;
     private String description;

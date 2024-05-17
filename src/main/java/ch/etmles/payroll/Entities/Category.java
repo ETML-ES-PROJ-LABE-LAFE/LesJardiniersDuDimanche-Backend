@@ -24,7 +24,7 @@ public class Category {
         this.parentCategory = parentCategory;
     }
 
-
+    //TODO Remove it or use it
     public Long getId() {
         return id;
     }
@@ -49,6 +49,7 @@ public class Category {
         this.parentCategory = parentCategory;
     }
 
+    //TODO Follow IDE Advice
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
