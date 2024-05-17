@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//TODO Documentation must be updated (employee !!!!)
+
 @RestController
+//TODO Crossorigin is hard coded in each controller
 @CrossOrigin(origins = "http://localhost:8081") // Allow requests from frontend URL
 
 public class LotController {

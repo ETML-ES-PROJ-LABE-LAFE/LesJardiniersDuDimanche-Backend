@@ -1,5 +1,7 @@
 package ch.etmles.payroll.Controllers;
 
+//TODO This "test class" must be moved to a more suitable folder and rewritten in a test class
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
