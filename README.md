@@ -1,38 +1,55 @@
-# Exam
+# Nom du Projet
 
-This repository has been created to assess students' skills on Spring.
+## Description
+Ce projet est une application Web en Java Spring Boot qui fournit une API RESTful afin de gérer la vente d'enchères.
 
-## First build
+L'application inclut les fonctionnalités suivantes :
 
-After cloning this repository, run this command:
+- Opérations CRUD pour les catégories et les lots
+- Gestion des exceptions pour les entités non trouvées
+- Chargement initial des données
 
-```
-   mvn clean spring-boot:run
-```
+## Structure des Fichiers
+Le projet est composé des fichiers suivants :
 
-to retrieve the dependencies, compile and run the program for the first time.
+### Contrôleurs
+- **CategoryController.java** : Gère les requêtes HTTP pour les catégories.
+- **LotController.java** : Gère les requêtes HTTP pour les lots.
+- **TestController.java** : Utilisé à des fins de test.
 
-```
-  [...]
-  2024-04-09T21:27:27.338+02:00  INFO 21340 --- [payroll] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-  2024-04-09T21:27:27.517+02:00  WARN 21340 --- [payroll] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be per
-  formed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-  2024-04-09T21:27:27.752+02:00  INFO 21340 --- [payroll] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-  2024-04-09T21:27:27.760+02:00  INFO 21340 --- [payroll] [           main] ch.etmles.payroll.PayrollApplication     : Started PayrollApplication in 2.972 seconds (process running for 3.247)
-  2024-04-09T21:27:27.802+02:00  INFO 21340 --- [payroll] [           main] c.e.payroll.Repositories.LoadDatabase    : Preloading Employee{id=1, name='Bilbo Baggins', role='burglar'}
-  2024-04-09T21:27:27.803+02:00  INFO 21340 --- [payroll] [           main] c.e.payroll.Repositories.LoadDatabase    : Preloading Employee{id=2, name='Frodo Baggins', role='thief'}
-  [...]
-```
+### Modèles
+- **Category.java** : Représente l'entité Catégorie.
+- **Lot.java** : Représente l'entité Lot.
 
-## Test using http requests
+### Répertoires
+- **CategoryRepository.java** : Interface pour l'accès aux données des catégories.
+- **LotRepository.java** : Interface pour l'accès aux données des lots.
 
-Got the file [project]\src\main\java\ch\etmles\payroll\Controllers\EmployeeController.java
+### Exceptions
+- **CategoryNotFoundException.java** : Exception personnalisée pour catégorie non trouvée.
+- **LotNotFoundException.java** : Exception personnalisée pour lot non trouvé.
 
-Before all routes methods, you will find a curl sample.
+### Conseils
+- **LotNotFoundAdvice.java** : Gestionnaire d'exception pour LotNotFoundException.
 
-## Backlog
+### Initialisation des Données
+- **LoadDatabase.java** : Classe pour charger les données initiales dans la base de données.
 
-Read the different issues.
+### Application Principale
+- **EnchereApplication.java** : Classe principale pour démarrer l'application Spring Boot.
 
-[Issues](https://github.com/ETML-ES-FWBE/exam/issues)
-
+## Comment Exécuter
+1. Clonez le dépôt.
+2. Assurez-vous d'avoir Java et Maven installés.
+   Téléchargez Maven à partir de [ce lien](https://maven.apache.org/download.cgi).
+   Décompressez le fichier téléchargé à l'emplacement souhaité. 
+   Ajoutez le chemin `bin` de Maven aux variables d'environnement. Par exemple :
+      ```sh
+      C:\Program Files\apache-maven-3.8.6\bin
+3. Naviguez jusqu'au répertoire du projet.
+4. Exécutez l'application avec la commande suivante :
+   ```sh
+   mvn spring-boot:run
+5. Lancer le projet BackEnd avant le projet FrontEnd afin de faire venir les données : 
+    ```sh 
+   run EnchereApplication
