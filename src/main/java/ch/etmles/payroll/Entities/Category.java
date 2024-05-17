@@ -1,6 +1,3 @@
-// Dossier Entities /Fichier Category
-
-
 package ch.etmles.payroll.Entities;
 
 import jakarta.persistence.Entity;
@@ -26,9 +23,6 @@ public class Category {
     }
 
     //TODO Remove it or use it
-    public Long getId() {
-        return id;
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -54,8 +48,7 @@ public class Category {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category)) return false;
-        Category category = (Category) o;
+        if (!(o instanceof Category category)) return false;
         return Objects.equals(id, category.id) && Objects.equals(name, category.name);
     }
 

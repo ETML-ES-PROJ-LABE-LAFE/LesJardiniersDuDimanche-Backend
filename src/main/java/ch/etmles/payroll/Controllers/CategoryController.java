@@ -1,5 +1,4 @@
 // TODO this annotation must be removed
-//Dossier Controllers/CategoryController
 
 package ch.etmles.payroll.Controllers;
 
@@ -12,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
-@CrossOrigin(origins = "http://localhost:8081") // Allow requests from frontend URL
+//@CrossOrigin(origins = "http://localhost:8081")
 public class CategoryController {
 
     private final CategoryRepository repository;

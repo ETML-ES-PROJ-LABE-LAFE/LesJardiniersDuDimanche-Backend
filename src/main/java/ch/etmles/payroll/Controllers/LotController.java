@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 //TODO Crossorigin is hard coded in each controller
-@CrossOrigin(origins = "http://localhost:8081") // Allow requests from frontend URL
+//@CrossOrigin(origins = "http://localhost:8081")
 
 public class LotController {
 
@@ -24,45 +24,28 @@ public class LotController {
         this.categoryRepository = categoryRepository;
     }
 
-    /* curl sample :
-    curl -i localhost:8080/employees
-    */
-
     @GetMapping("/lots")
     List<Lot> all(){
         System.out.println("Test");
         return repository.findAll();
     }
 
-    /* curl sample :
-    curl -i -X POST localhost:8080/employees ^
-        -H "Content-type:application/json" ^
-        -d "{\"name\": \"Russel George\", \"role\": \"gardener\"}"
-    */
     @PostMapping("/lots")
     Lot newLot(@RequestBody Lot newLot){
         return repository.save(newLot);
     }
 
-    /* curl sample :
-    curl -i localhost:8080/employees/1
-    */
     @GetMapping("/lots/{id}")
     Lot one(@PathVariable Long id){
         return repository.findById(id)
                 .orElseThrow(() -> new LotNotFoundException(id));
     }
 
-    /* curl sample :
-    curl -i -X PUT localhost:8080/employees/2 ^
-        -H "Content-type:application/json" ^
-        -d "{\"name\": \"Samwise Bing\", \"role\": \"peer-to-peer\"}"
-     */
     @PutMapping("/lots/{id}")
     Lot replaceLot(@RequestBody Lot newLot, @PathVariable Long id) {
         return repository.findById(id)
                 .map(lot -> {
-                    lot.setNom(newLot.getNom());
+                    lot.setName(newLot.getName());
                     lot.setDescription(newLot.getDescription());
                     return repository.save(lot);
                 })
@@ -72,15 +55,11 @@ public class LotController {
                 });
     }
 
-    /* curl sample :
-    curl -i -X DELETE localhost:8080/employees/2
-    */
     @DeleteMapping("/lots/{id}")
     void deleteLot(@PathVariable Long id){
         repository.deleteById(id);
     }
 
-     // Nouvelle route pour obtenir les lots par catégorie
     @GetMapping("/lots/category/{categoryId}")
     public List<Lot> getByCategory(@PathVariable Long categoryId) {
         Category category = categoryRepository.findById(categoryId)
@@ -90,7 +69,7 @@ public class LotController {
 
     @GetMapping("/lots/subcategory/{subCategoryId}")
     public List<Lot> getBySubCategory(@PathVariable Long subCategoryId) {
-        return repository.findBySouscategory_Id(subCategoryId);
+        return repository.findBySubCategory_Id(subCategoryId);
     }
 
 
