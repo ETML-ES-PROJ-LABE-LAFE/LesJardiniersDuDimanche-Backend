@@ -15,6 +15,7 @@ public class TestController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    //TODO must be removed
     @GetMapping("/test-db")
     public ResponseEntity<String> testDatabaseConnection() {
         try {
