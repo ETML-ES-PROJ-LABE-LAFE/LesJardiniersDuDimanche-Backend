@@ -23,6 +23,10 @@ public class Category {
     }
 
     //TODO Remove it or use it
+    public Long getId() {
+        return id; //Je ne peux pas l'enlever il est utiliser par les filtres des catégories sur le frontend
+                    // J'ai fais des tests après l'avoir enlevé, les filtres ne fonctionne plus car il n'arrive pas récupérer l'ID de la catégorie
+    }
 
     public void setId(Long id) {
         this.id = id;
