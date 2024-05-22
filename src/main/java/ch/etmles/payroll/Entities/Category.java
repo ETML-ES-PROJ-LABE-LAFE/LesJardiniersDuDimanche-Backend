@@ -24,7 +24,8 @@ public class Category {
 
     //TODO Remove it or use it
     public Long getId() {
-        return id;
+        return id; //Je ne peux pas l'enlever il est utiliser par les filtres des catégories sur le frontend
+                    // J'ai fais des tests après l'avoir enlevé, les filtres ne fonctionne plus car il n'arrive pas récupérer l'ID de la catégorie
     }
 
     public void setId(Long id) {
@@ -51,8 +52,7 @@ public class Category {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category)) return false;
-        Category category = (Category) o;
+        if (!(o instanceof Category category)) return false;
         return Objects.equals(id, category.id) && Objects.equals(name, category.name);
     }
 

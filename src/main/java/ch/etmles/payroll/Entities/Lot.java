@@ -10,76 +10,77 @@ public class Lot {
 
     //TODO remove french content
     private @Id @GeneratedValue Long id;
-    private String nom;
+    private String name;
     private String description;
-    private Double prixDepart;
-    private @Temporal(TemporalType.TIMESTAMP) Date dateHeureDebut;
-    private @Temporal(TemporalType.TIMESTAMP) Date dateHeureFin;
+    private Double startingPrice;
+    private @Temporal(TemporalType.TIMESTAMP) Date startingDateHours;
+    private @Temporal(TemporalType.TIMESTAMP) Date endingDateHours;
+
     @ManyToOne
     private Category category;
     @ManyToOne
-    private Category souscategory;
+    private Category subCategory; // Ensure the property name is correct
 
     public Lot() {}
 
-    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin,
-               Category category, Category souscategory) {
-        this.setNom(nom);
+    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory) {
+        this.setName(nom);
         this.setDescription(description);
-        this.setPrixDepart(prixDepart);
-        this.setDateHeureDebut(dateHeureDebut);
-        this.setDateHeureFin(dateHeureFin);
+        this.setStartingPrice(prixDepart);
+        this.setStartingDateHours(dateHeureDebut);
+        this.setEndingDateHours(dateHeureFin);
         this.setCategory(category);
-        this.setSousCategory(souscategory);
+        this.setSubCategory(subcategory);
     }
 
+    // Getter and setter methods
 
-    public Long getID() {
-        return this.id;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNom() {
-        return this.nom;
+    public String getName() {
+        return this.name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Double getPrixDepart() {
-        return prixDepart;
+    public Double getStartingPrice() {
+        return startingPrice;
     }
 
-    public void setPrixDepart(Double prixDepart) {
-        this.prixDepart = prixDepart;
+    public void setStartingPrice(Double startingPrice) {
+        this.startingPrice = startingPrice;
     }
 
-    public Date getDateHeureDebut() {
-        return dateHeureDebut;
+    public Date getStartingDateHours() {
+        return startingDateHours;
     }
 
-    public void setDateHeureDebut(Date dateHeureDebut) {
-        this.dateHeureDebut = dateHeureDebut;
+    public void setStartingDateHours(Date startingDateHours) {
+        this.startingDateHours = startingDateHours;
     }
 
-    public Date getDateHeureFin() {
-        return dateHeureFin;
+    public Date getEndingDateHours() {
+        return endingDateHours;
     }
 
-    public void setDateHeureFin(Date dateHeureFin) {
-        this.dateHeureFin = dateHeureFin;
+    public void setEndingDateHours(Date endingDateHours) {
+        this.endingDateHours = endingDateHours;
     }
 
     public Category getCategory() {
@@ -90,40 +91,40 @@ public class Lot {
         this.category = category;
     }
 
-    public Category getSousCategory() {
-        return souscategory;
+    public Category getSubCategory() {
+        return subCategory;
     }
 
-    public void setSousCategory(Category souscategory) {
-        this.souscategory = souscategory;
+    public void setSubCategory(Category subCategory) {
+        this.subCategory = subCategory;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Lot lot)) return false;
-        return Objects.equals(id, lot.id) && Objects.equals(nom, lot.nom)
-                && Objects.equals(description, lot.description) && Objects.equals(prixDepart, lot.prixDepart)
-                && Objects.equals(dateHeureDebut, lot.dateHeureDebut) && Objects.equals(dateHeureFin, lot.dateHeureFin)
-                && category == lot.category && souscategory == lot.souscategory;
+        return Objects.equals(id, lot.id) && Objects.equals(name, lot.name)
+                && Objects.equals(description, lot.description) && Objects.equals(startingPrice, lot.startingPrice)
+                && Objects.equals(startingDateHours, lot.startingDateHours) && Objects.equals(endingDateHours, lot.endingDateHours)
+                && category == lot.category && subCategory == lot.subCategory;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nom, description, prixDepart, dateHeureDebut, dateHeureFin, category, souscategory) ;
+        return Objects.hash(id, name, description, startingPrice, startingDateHours, endingDateHours, category, subCategory);
     }
 
     @Override
     public String toString() {
         return "Lot{" +
                 "id=" + id +
-                ", nom='" + nom + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", prixDepart=" + prixDepart +
-                ", dateHeureDebut=" + dateHeureDebut +
-                ", dateHeureFin=" + dateHeureFin +
-                ", categorie=" + category +
-                ", souscategory=" + souscategory +
+                ", startingPrice=" + startingPrice +
+                ", startingDateHours=" + startingDateHours +
+                ", endingDateHours=" + endingDateHours +
+                ", category=" + category +
+                ", subCategory=" + subCategory +
                 '}';
     }
 }

@@ -13,7 +13,7 @@ public class LotNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(LotNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(LotNotFoundException ex){
+    String LotNotFoundHandler(LotNotFoundException ex){
         return ex.getMessage();
     }
 }
