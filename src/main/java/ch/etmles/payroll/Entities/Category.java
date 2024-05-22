@@ -1,5 +1,3 @@
-// Dossier Entities /Fichier Category
-
 package ch.etmles.payroll.Entities;
 
 import jakarta.persistence.Entity;

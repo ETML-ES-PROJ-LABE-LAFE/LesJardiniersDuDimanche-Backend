@@ -1,5 +1,3 @@
-//Dossier Entities / Fichier Lot
-
 package ch.etmles.payroll.Entities;
 
 import jakarta.persistence.*;
@@ -14,9 +12,9 @@ public class Lot {
     private @Id @GeneratedValue Long id;
     private String nom;
     private String description;
-    private Double prixDepart; // Attribut pour le prix de départ
-    private @Temporal(TemporalType.TIMESTAMP) Date dateHeureDebut; // Date et heure de début avec annotation pour JPA
-    private @Temporal(TemporalType.TIMESTAMP) Date dateHeureFin; // Date et heure de fin avec annotation pour JPA
+    private Double prixDepart;
+    private @Temporal(TemporalType.TIMESTAMP) Date dateHeureDebut;
+    private @Temporal(TemporalType.TIMESTAMP) Date dateHeureFin;
     @ManyToOne
     private Category category;
     @ManyToOne
@@ -24,7 +22,8 @@ public class Lot {
 
     public Lot() {}
 
-    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin, Category category, Category souscategory) {
+    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin,
+               Category category, Category souscategory) {
         this.setNom(nom);
         this.setDescription(description);
         this.setPrixDepart(prixDepart);
