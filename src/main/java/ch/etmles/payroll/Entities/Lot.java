@@ -13,8 +13,11 @@ public class Lot {
     private String name;
     private String description;
     private Double startingPrice;
+
+    private Double actualPrice;
     private @Temporal(TemporalType.TIMESTAMP) Date startingDateHours;
     private @Temporal(TemporalType.TIMESTAMP) Date endingDateHours;
+
 
     @ManyToOne
     private Category category;
@@ -23,7 +26,7 @@ public class Lot {
 
     public Lot() {}
 
-    public Lot(String nom, String description, Double prixDepart, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory) {
+    public Lot(String nom, String description, Double prixDepart, Double actualPrice, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory) {
         this.setName(nom);
         this.setDescription(description);
         this.setStartingPrice(prixDepart);
@@ -31,6 +34,7 @@ public class Lot {
         this.setEndingDateHours(dateHeureFin);
         this.setCategory(category);
         this.setSubCategory(subcategory);
+        this.setActualPrice(actualPrice);
     }
 
     // Getter and setter methods
@@ -61,6 +65,14 @@ public class Lot {
 
     public Double getStartingPrice() {
         return startingPrice;
+    }
+
+    public void setActualPrice(Double actualPrice) {
+        this.actualPrice = actualPrice;
+    }
+
+    public Double getActualPrice() {
+        return actualPrice;
     }
 
     public void setStartingPrice(Double startingPrice) {
@@ -98,6 +110,8 @@ public class Lot {
     public void setSubCategory(Category subCategory) {
         this.subCategory = subCategory;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -47,6 +47,7 @@ public class LotController {
                 .map(lot -> {
                     lot.setName(newLot.getName());
                     lot.setDescription(newLot.getDescription());
+                    lot.setActualPrice(newLot.getActualPrice());
                     return repository.save(lot);
                 })
                 .orElseGet(() -> {
