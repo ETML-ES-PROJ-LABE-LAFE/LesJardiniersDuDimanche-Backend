@@ -3,6 +3,7 @@ package ch.etmles.payroll.Entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "app_user")  // Changer le nom de la table pour éviter les conflits avec les mots réservés
@@ -67,4 +68,28 @@ public class User {
         this.wallet = wallet;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return isConnected == user.isConnected && Objects.equals(id, user.id)
+                && Objects.equals(name, user.name) && Objects.equals(email, user.email)
+                && Objects.equals(wallet, user.wallet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, isConnected, wallet);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", isConnected=" + isConnected +
+                ", wallet=" + wallet +
+                '}';
+    }
 }
