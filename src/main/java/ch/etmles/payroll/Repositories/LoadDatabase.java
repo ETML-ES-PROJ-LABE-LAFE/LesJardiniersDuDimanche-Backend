@@ -2,12 +2,14 @@ package ch.etmles.payroll.Repositories;
 
 import ch.etmles.payroll.Entities.Lot;
 import ch.etmles.payroll.Entities.Category;
+import ch.etmles.payroll.Entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 
 @Configuration
@@ -15,7 +17,7 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(LotRepository repository, CategoryRepository categoryRepository) {
+    CommandLineRunner initDatabase(LotRepository repository, CategoryRepository categoryRepository, UserRepository userRepository) {
         return args -> {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
@@ -52,6 +54,14 @@ public class LoadDatabase {
                 log.info("Preloading " + repository.save(lot4));
                 log.info("Preloading " + repository.save(lot5));
                 log.info("Preloading " + repository.save(lot6));
+
+                // Créer et sauvegarder des utilisateurs
+                User user1 = new User("John Doe", "john.doe@example.com", new BigDecimal("100.00"));
+                User user2 = new User("Jane Smith", "jane.smith@example.com", new BigDecimal("150.00"));
+
+                log.info("Preloading " + userRepository.save(user1));
+                log.info("Preloading " + userRepository.save(user2));
+
             } catch (Exception e) {
                 log.error("Error initializing database", e);
             }
