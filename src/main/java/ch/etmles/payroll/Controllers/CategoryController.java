@@ -26,6 +26,11 @@ public class CategoryController {
         return repository.findAll();
     }
 
+    @GetMapping("/subcategories/{parentId}")
+    public List<Category> getSubCategoriesByParentId(@PathVariable Long parentId) {
+        return repository.findByParentCategoryId(parentId);
+    }
+
     @PostMapping
     public Category addCategory(@RequestBody Category category) {
         return repository.save(category);
