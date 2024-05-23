@@ -4,10 +4,10 @@ import ch.etmles.payroll.Entities.User;
 import ch.etmles.payroll.Repositories.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:8081")
 public class UserController {
 
     private final UserRepository repository;
@@ -39,6 +39,7 @@ public class UserController {
                     user.setName(newUser.getName());
                     user.setEmail(newUser.getEmail());
                     user.setConnected(newUser.isConnected());
+                    user.setWallet(newUser.getWallet());
                     return repository.save(user);
                 })
                 .orElseGet(() -> {
@@ -50,5 +51,25 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     void deleteUser(@PathVariable Long id) {
         repository.deleteById(id);
+    }
+
+    @PostMapping("/users/{id}/credit")
+    User creditWallet(@PathVariable Long id, @RequestBody BigDecimal amount) {
+        return repository.findById(id)
+                .map(user -> {
+                    user.setWallet(user.getWallet().add(amount));
+                    return repository.save(user);
+                })
+                .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    @PostMapping("/users/{id}/debit")
+    User debitWallet(@PathVariable Long id, @RequestBody BigDecimal amount) {
+        return repository.findById(id)
+                .map(user -> {
+                    user.setWallet(user.getWallet().subtract(amount));
+                    return repository.save(user);
+                })
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 }
