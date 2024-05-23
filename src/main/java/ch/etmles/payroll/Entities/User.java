@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "app_user")  // Changer le nom de la table pour éviter les conflits avec les mots réservés
 public class User {
 
     @Id

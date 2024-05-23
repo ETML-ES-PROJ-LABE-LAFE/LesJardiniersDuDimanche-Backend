@@ -10,65 +10,65 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
-    UserController(UserRepository repository) {
-        this.repository = repository;
+    UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/users")
     List<User> all() {
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
     @PostMapping("/users")
     User newUser(@RequestBody User newUser) {
-        return repository.save(newUser);
+        return userRepository.save(newUser);
     }
 
     @GetMapping("/users/{id}")
     User one(@PathVariable Long id) {
-        return repository.findById(id)
+        return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @PutMapping("/users/{id}")
     User replaceUser(@RequestBody User newUser, @PathVariable Long id) {
-        return repository.findById(id)
+        return userRepository.findById(id)
                 .map(user -> {
                     user.setName(newUser.getName());
                     user.setEmail(newUser.getEmail());
                     user.setConnected(newUser.isConnected());
                     user.setWallet(newUser.getWallet());
-                    return repository.save(user);
+                    return userRepository.save(user);
                 })
                 .orElseGet(() -> {
                     newUser.setId(id);
-                    return repository.save(newUser);
+                    return userRepository.save(newUser);
                 });
     }
 
     @DeleteMapping("/users/{id}")
     void deleteUser(@PathVariable Long id) {
-        repository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     @PostMapping("/users/{id}/credit")
     User creditWallet(@PathVariable Long id, @RequestBody BigDecimal amount) {
-        return repository.findById(id)
+        return userRepository.findById(id)
                 .map(user -> {
                     user.setWallet(user.getWallet().add(amount));
-                    return repository.save(user);
+                    return userRepository.save(user);
                 })
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @PostMapping("/users/{id}/debit")
     User debitWallet(@PathVariable Long id, @RequestBody BigDecimal amount) {
-        return repository.findById(id)
+        return userRepository.findById(id)
                 .map(user -> {
                     user.setWallet(user.getWallet().subtract(amount));
-                    return repository.save(user);
+                    return userRepository.save(user);
                 })
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
