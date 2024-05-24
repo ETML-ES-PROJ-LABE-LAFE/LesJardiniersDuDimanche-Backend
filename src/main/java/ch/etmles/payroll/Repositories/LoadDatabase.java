@@ -57,7 +57,7 @@ public class LoadDatabase {
 
                 // Créer et sauvegarder des utilisateurs
                 User user1 = new User("John Doe", "john.doe@example.com", new BigDecimal("100.00"));
-                User user2 = new User("Jane Smith", "jane.smith@example.com", new BigDecimal("150.00"));
+                User user2 = new User("Max Verstappen", "max.verstappen@example.com", new BigDecimal("150.00"));
 
                 log.info("Preloading " + userRepository.save(user1));
                 log.info("Preloading " + userRepository.save(user2));
