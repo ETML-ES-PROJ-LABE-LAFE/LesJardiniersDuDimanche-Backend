@@ -4,6 +4,8 @@ import ch.etmles.payroll.Entities.Category;
 import ch.etmles.payroll.Entities.Lot;
 import ch.etmles.payroll.Repositories.CategoryRepository;
 import ch.etmles.payroll.Repositories.LotRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -72,6 +74,23 @@ public class LotController {
     public List<Lot> getBySubCategory(@PathVariable Long subCategoryId) {
         return repository.findBySubCategory_Id(subCategoryId);
     }
+
+    @PutMapping("/lots/{id}/bid")
+    public ResponseEntity<String> placeBid(@PathVariable Long id, @RequestBody Double bidAmount) {
+        return repository.findById(id)
+                .map(lot -> {
+                    if (bidAmount > lot.getActualPrice()) {
+                        lot.setActualPrice(bidAmount);
+                        repository.save(lot);
+                        return ResponseEntity.ok("Enchère effectuée avec succès");
+                    } else {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le prix de votre enchère doit etre plus élevé que le prix actuel");
+                    }
+                })
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lot non trouvé"));
+    }
+
+
 
 
 }
