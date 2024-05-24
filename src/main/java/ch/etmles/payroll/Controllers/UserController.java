@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -47,6 +48,18 @@ public class UserController {
                     return userRepository.save(newUser);
                 });
     }
+
+    @PutMapping("/users/{id}/isConnected")
+    User updateIsConnected(@PathVariable Long id, @RequestBody Map<String, Boolean> isConnectedMap) {
+    boolean isConnected = isConnectedMap.get("isConnected");
+    return userRepository.findById(id)
+            .map(user -> {
+                user.setConnected(isConnected);
+                return userRepository.save(user); // Return the updated user
+            })
+            .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
 
     @DeleteMapping("/users/{id}")
     void deleteUser(@PathVariable Long id) {
