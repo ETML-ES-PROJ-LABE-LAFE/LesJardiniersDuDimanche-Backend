@@ -1,4 +1,4 @@
-package ch.etmles.payroll.Controllers;
+package ch.etmles.auctionapp.Controllers;
 
 public class CategoryNotFoundException extends RuntimeException{
 

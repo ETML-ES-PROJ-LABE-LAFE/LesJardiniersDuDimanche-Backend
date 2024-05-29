@@ -1,4 +1,4 @@
-    package ch.etmles.payroll.Entities;
+    package ch.etmles.auctionapp.Entities;
 
     import jakarta.persistence.*;
 

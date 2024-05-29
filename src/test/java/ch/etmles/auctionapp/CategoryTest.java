@@ -1,8 +1,7 @@
-package ch.etmles.payroll;
+package ch.etmles.auctionapp;
 
 import org.junit.jupiter.api.Test;
 
-import org.springframework.boot.test.context.SpringBootTest;
 public class CategoryTest {
     @Test
     void getname(){}

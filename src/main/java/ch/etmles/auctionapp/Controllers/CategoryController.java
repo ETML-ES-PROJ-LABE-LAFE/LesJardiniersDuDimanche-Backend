@@ -1,9 +1,9 @@
 // TODO this annotation must be removed
 
-package ch.etmles.payroll.Controllers;
+package ch.etmles.auctionapp.Controllers;
 
-import ch.etmles.payroll.Entities.Category;
-import ch.etmles.payroll.Repositories.CategoryRepository;
+import ch.etmles.auctionapp.Entities.Category;
+import ch.etmles.auctionapp.Repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

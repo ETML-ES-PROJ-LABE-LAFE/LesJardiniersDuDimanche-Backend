@@ -1,9 +1,9 @@
-package ch.etmles.payroll.Controllers;
+package ch.etmles.auctionapp.Controllers;
 
-import ch.etmles.payroll.Entities.Category;
-import ch.etmles.payroll.Entities.Lot;
-import ch.etmles.payroll.Repositories.CategoryRepository;
-import ch.etmles.payroll.Repositories.LotRepository;
+import ch.etmles.auctionapp.Entities.Category;
+import ch.etmles.auctionapp.Entities.Lot;
+import ch.etmles.auctionapp.Repositories.CategoryRepository;
+import ch.etmles.auctionapp.Repositories.LotRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

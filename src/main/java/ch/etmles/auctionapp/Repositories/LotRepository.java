@@ -1,7 +1,7 @@
-package ch.etmles.payroll.Repositories;
+package ch.etmles.auctionapp.Repositories;
 
-import ch.etmles.payroll.Entities.Category;
-import ch.etmles.payroll.Entities.Lot;
+import ch.etmles.auctionapp.Entities.Category;
+import ch.etmles.auctionapp.Entities.Lot;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

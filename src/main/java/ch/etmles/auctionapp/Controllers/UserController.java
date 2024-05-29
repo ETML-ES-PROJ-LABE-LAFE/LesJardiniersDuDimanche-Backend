@@ -1,7 +1,7 @@
-package ch.etmles.payroll.Controllers;
+package ch.etmles.auctionapp.Controllers;
 
-import ch.etmles.payroll.Entities.User;
-import ch.etmles.payroll.Repositories.UserRepository;
+import ch.etmles.auctionapp.Entities.User;
+import ch.etmles.auctionapp.Repositories.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
