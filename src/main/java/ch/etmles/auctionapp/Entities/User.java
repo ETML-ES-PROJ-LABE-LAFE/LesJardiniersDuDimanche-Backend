@@ -6,7 +6,7 @@
     import java.util.Objects;
 
     @Entity
-    @Table(name = "app_user")  // Changer le nom de la table pour éviter les conflits avec les mots réservés
+    @Table(name = "app_user")
     public class User {
 
         @Id
@@ -24,7 +24,7 @@
          public User(String name, String email, BigDecimal wallet) {
             this.name = name;
             this.email = email;
-            this.isConnected = false; // Par défaut, l'utilisateur n'est pas connecté
+            this.isConnected = false;
             this.wallet = wallet;
         }
 

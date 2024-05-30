@@ -55,7 +55,7 @@ public class UserController {
     return userRepository.findById(id)
             .map(user -> {
                 user.setConnected(isConnected);
-                return userRepository.save(user); // Return the updated user
+                return userRepository.save(user);
             })
             .orElseThrow(() -> new UserNotFoundException(id));
     }

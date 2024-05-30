@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 //TODO Crossorigin is hard coded in each controller
-//@CrossOrigin(origins = "http://localhost:8081")
+
 
 public class LotController {
 

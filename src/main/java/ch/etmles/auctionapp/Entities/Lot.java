@@ -22,7 +22,7 @@ public class Lot {
     @ManyToOne
     private Category category;
     @ManyToOne
-    private Category subCategory; // Ensure the property name is correct
+    private Category subCategory;
 
     public Lot() {}
 
