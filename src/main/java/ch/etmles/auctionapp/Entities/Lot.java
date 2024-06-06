@@ -1,32 +1,35 @@
 package ch.etmles.auctionapp.Entities;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 public class Lot {
 
-    //TODO remove french content
-    private @Id @GeneratedValue Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
     private String name;
     private String description;
     private Double startingPrice;
-
     private Double actualPrice;
-    private @Temporal(TemporalType.TIMESTAMP) Date startingDateHours;
-    private @Temporal(TemporalType.TIMESTAMP) Date endingDateHours;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startingDateHours;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endingDateHours;
 
     @ManyToOne
     private Category category;
     @ManyToOne
     private Category subCategory;
 
+    @ManyToOne
+    private User user;
+
     public Lot() {}
 
-    public Lot(String nom, String description, Double prixDepart, Double actualPrice, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory) {
+    public Lot(String nom, String description, Double prixDepart, Double actualPrice, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory, User user) {
         this.setName(nom);
         this.setDescription(description);
         this.setStartingPrice(prixDepart);
@@ -35,6 +38,7 @@ public class Lot {
         this.setCategory(category);
         this.setSubCategory(subcategory);
         this.setActualPrice(actualPrice);
+        this.setUser(user);
     }
 
     // Getter and setter methods
@@ -111,7 +115,13 @@ public class Lot {
         this.subCategory = subCategory;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -120,12 +130,13 @@ public class Lot {
         return Objects.equals(id, lot.id) && Objects.equals(name, lot.name)
                 && Objects.equals(description, lot.description) && Objects.equals(startingPrice, lot.startingPrice)
                 && Objects.equals(startingDateHours, lot.startingDateHours) && Objects.equals(endingDateHours, lot.endingDateHours)
-                && category == lot.category && subCategory == lot.subCategory;
+                && Objects.equals(category, lot.category) && Objects.equals(subCategory, lot.subCategory)
+                && Objects.equals(user, lot.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, startingPrice, startingDateHours, endingDateHours, category, subCategory);
+        return Objects.hash(id, name, description, startingPrice, startingDateHours, endingDateHours, category, subCategory, user);
     }
 
     @Override
@@ -135,10 +146,12 @@ public class Lot {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", startingPrice=" + startingPrice +
+                ", actualPrice=" + actualPrice +
                 ", startingDateHours=" + startingDateHours +
                 ", endingDateHours=" + endingDateHours +
                 ", category=" + category +
                 ", subCategory=" + subCategory +
+                ", user=" + user +
                 '}';
     }
 }
