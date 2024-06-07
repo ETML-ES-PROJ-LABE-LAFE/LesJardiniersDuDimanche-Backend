@@ -66,21 +66,24 @@ public class UserController {
         userRepository.deleteById(id);
     }
 
-    @PostMapping("/users/{id}/credit")
-    User creditWallet(@PathVariable Long id, @RequestBody BigDecimal amount) {
+    @PutMapping("/users/{id}/email")
+    User updateEmail(@PathVariable Long id, @RequestBody Map<String, String> emailMap) {
+        String newEmail = emailMap.get("email");
         return userRepository.findById(id)
                 .map(user -> {
-                    user.setWallet(user.getWallet().add(amount));
+                    user.setEmail(newEmail);
                     return userRepository.save(user);
                 })
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    @PostMapping("/users/{id}/debit")
-    User debitWallet(@PathVariable Long id, @RequestBody BigDecimal amount) {
+     // Route simplifiée pour mettre à jour le portefeuille
+    @PutMapping("/users/{id}/wallet")
+    User updateWallet(@PathVariable Long id, @RequestBody Map<String, BigDecimal> walletMap) {
+        BigDecimal amount = walletMap.get("amount");
         return userRepository.findById(id)
                 .map(user -> {
-                    user.setWallet(user.getWallet().subtract(amount));
+                    user.setWallet(user.getWallet().add(amount));
                     return userRepository.save(user);
                 })
                 .orElseThrow(() -> new UserNotFoundException(id));
