@@ -77,7 +77,7 @@ public class UserController {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-     // Route simplifiée pour mettre à jour le portefeuille
+
     @PutMapping("/users/{id}/wallet")
     User updateWallet(@PathVariable Long id, @RequestBody Map<String, BigDecimal> walletMap) {
         BigDecimal amount = walletMap.get("amount");
@@ -88,4 +88,20 @@ public class UserController {
                 })
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
+
+    @PutMapping("/users/{id}/wallet/deduct")
+    User deductFromWallet(@PathVariable Long id, @RequestBody Map<String, BigDecimal> walletMap) {
+        BigDecimal amount = walletMap.get("amount");
+        return userRepository.findById(id)
+                .map(user -> {
+                    if (user.getWallet().compareTo(amount) < 0) {
+                        throw new UserInsufficientFundsException(id, amount);
+                    }
+                    user.setWallet(user.getWallet().subtract(amount));
+                    return userRepository.save(user);
+                })
+                .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+
 }
