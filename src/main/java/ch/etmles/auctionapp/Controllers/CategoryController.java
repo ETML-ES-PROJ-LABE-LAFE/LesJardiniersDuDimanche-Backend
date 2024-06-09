@@ -1,5 +1,3 @@
-// TODO this annotation must be removed
-
 package ch.etmles.auctionapp.Controllers;
 
 import ch.etmles.auctionapp.Entities.Category;
@@ -11,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
-//@CrossOrigin(origins = "http://localhost:8081")
+//@CrossOrigin(origins = "http://localhost:8081") //TODO this annotation must be removed
 public class CategoryController {
 
     private final CategoryRepository repository;
@@ -34,6 +32,7 @@ public class CategoryController {
     @PostMapping
     public Category addCategory(@RequestBody Category category) {
         return repository.save(category);
+        //TODO add exception if category already exists (using the unique constraint)
     }
 
     @GetMapping("/{id}")
@@ -59,5 +58,6 @@ public class CategoryController {
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable Long id) {
         repository.deleteById(id);
+        //TODO add exception if category doesn't exist
     }
 }

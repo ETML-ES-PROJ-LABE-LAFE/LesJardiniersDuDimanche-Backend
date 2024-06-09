@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping("/users")
     User newUser(@RequestBody User newUser) {
-        return userRepository.save(newUser);
+        return userRepository.save(newUser); //TODO unique constraint exception !!!!
     }
 
     @GetMapping("/users/{id}")
@@ -66,6 +66,7 @@ public class UserController {
         userRepository.deleteById(id);
     }
 
+    //TODO We need to talk about this route !
     @PostMapping("/users/{id}/credit")
     User creditWallet(@PathVariable Long id, @RequestBody BigDecimal amount) {
         return userRepository.findById(id)
@@ -76,6 +77,7 @@ public class UserController {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
+    //TODO We need to talk about this route, too !
     @PostMapping("/users/{id}/debit")
     User debitWallet(@PathVariable Long id, @RequestBody BigDecimal amount) {
         return userRepository.findById(id)

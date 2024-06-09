@@ -10,12 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//TODO Documentation must be updated (employee !!!!)
+//TODO Documentation must be updated (employee !!!!) -> do not forget to do this in the pom.xml too.
 
 @RestController
-//TODO Crossorigin is hard coded in each controller
-
-
 public class LotController {
 
     private final LotRepository repository;
@@ -28,7 +25,7 @@ public class LotController {
 
     @GetMapping("/lots")
     List<Lot> all(){
-        System.out.println("Test");
+        System.out.println("Test");//TODO remove this !
         return repository.findAll();
     }
 
@@ -61,6 +58,7 @@ public class LotController {
     @DeleteMapping("/lots/{id}")
     void deleteLot(@PathVariable Long id){
         repository.deleteById(id);
+        //TODO add exception if lot doesn't exist
     }
 
     @GetMapping("/lots/category/{categoryId}")
@@ -84,6 +82,7 @@ public class LotController {
                         repository.save(lot);
                         return ResponseEntity.ok("Enchère effectuée avec succès");
                     } else {
+                        //TODO do not customize the response there. You should use a Advice for that.
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le prix de votre enchère doit etre plus élevé que le prix actuel");
                     }
                 })

@@ -1,6 +1,3 @@
-//Dossier Repositories/Fichier CategoryRespository
-
-
 package ch.etmles.auctionapp.Repositories;
 
 import ch.etmles.auctionapp.Entities.Category;
