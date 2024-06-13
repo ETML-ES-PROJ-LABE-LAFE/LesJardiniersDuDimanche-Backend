@@ -3,6 +3,8 @@ package ch.etmles.auctionapp.Controllers;
 import ch.etmles.auctionapp.Entities.Category;
 import ch.etmles.auctionapp.Repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,10 +31,15 @@ public class CategoryController {
         return repository.findByParentCategoryId(parentId);
     }
 
+
+    //TODO add exception if category already exists (using the unique constraint)
     @PostMapping
-    public Category addCategory(@RequestBody Category category) {
-        return repository.save(category);
-        //TODO add exception if category already exists (using the unique constraint)
+    public ResponseEntity<Category> addCategory(@RequestBody Category category) {
+        if (repository.existsByName(category.getName())) {
+            throw new CategoryAlreadyExistsException("Category already exists");
+        }
+        Category savedCategory = repository.save(category);
+        return new ResponseEntity<>(savedCategory, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -55,9 +62,23 @@ public class CategoryController {
                 });
     }
 
+    //TODO add exception if category doesn't exist
     @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        if (!repository.existsById(id)) {
+            throw new CategoryNotFoundException(id);
+        }
         repository.deleteById(id);
-        //TODO add exception if category doesn't exist
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(CategoryAlreadyExistsException.class)
+    public ResponseEntity<String> handleCategoryAlreadyExists(CategoryAlreadyExistsException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<String> handleCategoryNotFound(CategoryNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

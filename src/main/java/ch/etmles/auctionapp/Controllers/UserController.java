@@ -2,6 +2,8 @@ package ch.etmles.auctionapp.Controllers;
 
 import ch.etmles.auctionapp.Entities.User;
 import ch.etmles.auctionapp.Repositories.UserRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -23,8 +25,12 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    User newUser(@RequestBody User newUser) {
-        return userRepository.save(newUser); //TODO unique constraint exception !!!!
+    public ResponseEntity<User> newUser(@RequestBody User newUser) {
+        if (userRepository.findByEmail(newUser.getEmail()).isPresent()) {
+            throw new UserAlreadyExistsException("Un utilisateur avec cet email existe déjà.");
+        }
+        User savedUser = userRepository.save(newUser);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     @GetMapping("/users/{id}")
@@ -86,5 +92,10 @@ public class UserController {
                     return userRepository.save(user);
                 })
                 .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<String> handleUserAlreadyExists(UserAlreadyExistsException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
 }

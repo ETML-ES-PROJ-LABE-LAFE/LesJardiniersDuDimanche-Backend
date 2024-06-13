@@ -25,7 +25,7 @@ public class LotController {
 
     @GetMapping("/lots")
     List<Lot> all(){
-        System.out.println("Test");//TODO remove this !
+        //TODO remove this ! The console.log
         return repository.findAll();
     }
 
@@ -55,10 +55,15 @@ public class LotController {
                 });
     }
 
+    //TODO add exception if lot doesn't exist
+
     @DeleteMapping("/lots/{id}")
-    void deleteLot(@PathVariable Long id){
+    public ResponseEntity<Void> deleteLot(@PathVariable Long id) {
+        if (!repository.existsById(id)) {
+            throw new LotNotFoundException(id);
+        }
         repository.deleteById(id);
-        //TODO add exception if lot doesn't exist
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/lots/category/{categoryId}")
@@ -82,8 +87,7 @@ public class LotController {
                         repository.save(lot);
                         return ResponseEntity.ok("Enchère effectuée avec succès");
                     } else {
-                        //TODO do not customize the response there. You should use a Advice for that.
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le prix de votre enchère doit etre plus élevé que le prix actuel");
+                        throw new InsufficientBidAmountException("Le prix de votre enchère doit être plus élevé que le prix actuel");
                     }
                 })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lot non trouvé"));

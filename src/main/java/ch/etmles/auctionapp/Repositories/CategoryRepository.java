@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     List<Category> findByParentCategoryId(Long parentId);
+    boolean existsByName(String name);
 }
