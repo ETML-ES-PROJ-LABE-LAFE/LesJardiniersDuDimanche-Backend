@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Configuration
 public class LoadDatabase {
@@ -120,6 +121,18 @@ public class LoadDatabase {
                 log.info("Preloading " + repository.save(lot29));
                 log.info("Preloading " + repository.save(lot30));
 
+                // Lots list by Seller
+                List<User> users = userRepository.findAll();
+                for (User user : users) {
+                    List<Lot> userLots = repository.findByUser(user);
+                    StringBuilder lotsInfo = new StringBuilder();
+                    lotsInfo.append("Lots pour ").append(user.getName()).append(": {");
+                    for (Lot lot : userLots) {
+                        lotsInfo.append("ID=").append(lot.getId()).append(", Nom=").append(lot.getName()).append("; ");
+                    }
+                    lotsInfo.append("}");
+                    log.info(lotsInfo.toString());
+                }
 
             } catch (Exception e) {
                 log.error("Error initializing database", e);
