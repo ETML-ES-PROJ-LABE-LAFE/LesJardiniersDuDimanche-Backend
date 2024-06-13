@@ -34,55 +34,61 @@ public class LoadDatabase {
                 // Créer et sauvegarder des catégories
 
                 Category mainCategory1 = categoryRepository.save(new Category("Informatique", null));
-                Category subCategory1 = categoryRepository.save(new Category("Ordinateur", mainCategory1));
+                Category subCategory1a = categoryRepository.save(new Category("Ordinateur", mainCategory1));
+                Category subCategory1b = categoryRepository.save(new Category("Imprimante", mainCategory1));
 
                 Category mainCategory2 = categoryRepository.save(new Category("Jardinerie", null));
-                Category subCategory2 = categoryRepository.save(new Category("Tondeuse", mainCategory2));
+                Category subCategory2a = categoryRepository.save(new Category("Tondeuse", mainCategory2));
+                Category subCategory2b = categoryRepository.save(new Category("Robot de jardin", mainCategory2));
 
                 Category mainCategory3 = categoryRepository.save(new Category("Vêtements", null));
-                Category subCategory3 = categoryRepository.save(new Category("Chaussures", mainCategory3));
+                Category subCategory3a = categoryRepository.save(new Category("Chaussures", mainCategory3));
+                Category subCategory3b = categoryRepository.save(new Category("Vestes", mainCategory3));
 
                 Category mainCategory4 = categoryRepository.save(new Category("Cuisine", null));
-                Category subCategory4 = categoryRepository.save(new Category("Électroménager", mainCategory4));
+                Category subCategory4a = categoryRepository.save(new Category("Électroménager", mainCategory4));
+                Category subCategory4b = categoryRepository.save(new Category("Ustensiles", mainCategory4));
 
                 Category mainCategory5 = categoryRepository.save(new Category("Maison", null));
-                Category subCategory5 = categoryRepository.save(new Category("Décoration", mainCategory5));
+                Category subCategory5a = categoryRepository.save(new Category("Décoration", mainCategory5));
+                Category subCategory5b = categoryRepository.save(new Category("Meubles", mainCategory5));
 
                 Category mainCategory6 = categoryRepository.save(new Category("Électronique", null));
-                Category subCategory6 = categoryRepository.save(new Category("Télévision", mainCategory6));
+                Category subCategory6a = categoryRepository.save(new Category("Télévision", mainCategory6));
+                Category subCategory6b = categoryRepository.save(new Category("Smartphones", mainCategory6));
 
+// Créer et sauvegarder des lots
+                Lot lot1 = new Lot("PC HP", "PC HP très très rapide", 1000.00, 1100.00, sdf.parse("2023-01-01T09:00:00"), sdf.parse("2023-01-01T21:00:00"), mainCategory1, subCategory1a, user1);
+                Lot lot2 = new Lot("Tondeuse", "Tondeuse qui tond bien", 1500.00, 1600.00, sdf.parse("2023-01-02T09:00:00"), sdf.parse("2023-01-02T21:00:00"), mainCategory2, subCategory2a, user1);
+                Lot lot3 = new Lot("Chaussures Nike", "Chaussures qui courent vite", 400.00, 450.00, sdf.parse("2023-02-04T15:00:00"), sdf.parse("2023-04-05T21:00:00"), mainCategory3, subCategory3a, user1);
+                Lot lot4 = new Lot("Four intelligent", "Four qui critique vos recettes", 480.00, 530.00, sdf.parse("2023-02-04T15:00:00"), sdf.parse("2023-04-05T21:00:00"), mainCategory4, subCategory4a, user1);
+                Lot lot5 = new Lot("Aspirateur automatique", "Aspirateur intelligent", 670.00, 720.00, sdf.parse("2023-02-04T15:00:00"), sdf.parse("2023-04-05T21:00:00"), mainCategory5, subCategory5a, user1);
+                Lot lot6 = new Lot("Télévision 4K", "Télévision ultra haute définition", 800.00, 900.00, sdf.parse("2023-02-05T10:00:00"), sdf.parse("2023-05-05T22:00:00"), mainCategory6, subCategory6a, user1);
+                Lot lot7 = new Lot("Imprimante 3D", "Imprimante 3D de haute précision", 1200.00, 1300.00, sdf.parse("2023-01-15T09:00:00"), sdf.parse("2023-02-15T21:00:00"), mainCategory1, subCategory1b, user2);
+                Lot lot8 = new Lot("Robot V2000", "Robot qui entretient le jardin", 2000.00, 2100.00, sdf.parse("2023-03-10T09:00:00"), sdf.parse("2023-04-10T21:00:00"), mainCategory2, subCategory2b, user2);
+                Lot lot9 = new Lot("Veste en cuir", "Veste élégante et durable", 500.00, 550.00, sdf.parse("2023-03-20T09:00:00"), sdf.parse("2023-04-20T21:00:00"), mainCategory3, subCategory3b, user2);
+                Lot lot10 = new Lot("Mixeur haute puissance", "Mixeur pour des smoothies parfaits", 150.00, 200.00, sdf.parse("2023-02-25T09:00:00"), sdf.parse("2023-03-25T21:00:00"), mainCategory4, subCategory4b, user2);
+                Lot lot11 = new Lot("Canapé en cuir", "Canapé confortable et élégant", 700.00, 800.00, sdf.parse("2023-01-25T09:00:00"), sdf.parse("2023-02-25T21:00:00"), mainCategory5, subCategory5b, user2);
+                Lot lot12 = new Lot("Smartphone dernier modèle", "Smartphone avec écran OLED", 1000.00, 1100.00, sdf.parse("2023-02-15T09:00:00"), sdf.parse("2023-03-15T21:00:00"), mainCategory6, subCategory6b, user2);
+                Lot lot13 = new Lot("MacBook Pro", "Ordinateur portable performant", 2500.00, 2600.00, sdf.parse("2023-04-01T09:00:00"), sdf.parse("2023-04-30T21:00:00"), mainCategory1, subCategory1a, user1);
+                Lot lot14 = new Lot("Tondeuse robotisée", "Tondeuse qui travaille toute seule", 1800.00, 1900.00, sdf.parse("2023-05-01T09:00:00"), sdf.parse("2023-05-31T21:00:00"), mainCategory2, subCategory2a, user1);
+                Lot lot15 = new Lot("Bottes de randonnée", "Bottes pour terrains difficiles", 200.00, 250.00, sdf.parse("2023-06-01T09:00:00"), sdf.parse("2023-06-30T21:00:00"), mainCategory3, subCategory3a, user1);
+                Lot lot16 = new Lot("Robot cuiseur", "Robot pour préparer des plats rapidement", 350.00, 400.00, sdf.parse("2023-07-01T09:00:00"), sdf.parse("2023-07-31T21:00:00"), mainCategory4, subCategory4b, user1);
+                Lot lot17 = new Lot("Table basse en bois", "Table basse pour le salon", 150.00, 200.00, sdf.parse("2023-08-01T09:00:00"), sdf.parse("2023-08-31T21:00:00"), mainCategory5, subCategory5b, user1);
+                Lot lot18 = new Lot("Caméra de surveillance", "Caméra avec vision nocturne", 300.00, 350.00, sdf.parse("2023-09-01T09:00:00"), sdf.parse("2023-09-30T21:00:00"), mainCategory6, subCategory6b, user1);
+                Lot lot19 = new Lot("Ordinateur gaming", "PC pour jeux vidéo haute performance", 1500.00, 1600.00, sdf.parse("2023-10-01T09:00:00"), sdf.parse("2023-10-31T21:00:00"), mainCategory1, subCategory1a, user2);
+                Lot lot20 = new Lot("Tracteur tondeuse", "Tracteur pour grand jardin", 2500.00, 2600.00, sdf.parse("2023-11-01T09:00:00"), sdf.parse("2023-11-30T21:00:00"), mainCategory2, subCategory2a, user2);
+                Lot lot21 = new Lot("Vestes Nike", "Veste agréable et légère", 300.00, 350.00, sdf.parse("2023-12-01T09:00:00"), sdf.parse("2023-12-31T21:00:00"), mainCategory3, subCategory3b, user2);
+                Lot lot22 = new Lot("Grille-pain intelligent", "Grille-pain avec commandes vocales", 100.00, 150.00, sdf.parse("2024-01-01T09:00:00"), sdf.parse("2024-01-31T21:00:00"), mainCategory4, subCategory4b, user2);
+                Lot lot23 = new Lot("Lampe de chevet", "Lampe avec lumière ajustable", 50.00, 100.00, sdf.parse("2024-02-01T09:00:00"), sdf.parse("2024-02-28T21:00:00"), mainCategory5, subCategory5a, user2);
+                Lot lot24 = new Lot("Appareil photo reflex", "Appareil photo pour les professionnels", 800.00, 900.00, sdf.parse("2024-03-01T09:00:00"), sdf.parse("2024-03-31T21:00:00"), mainCategory6, subCategory6a, user2);
+                Lot lot25 = new Lot("Imprimante HD LaserJet", "Imprimante professionnel pour les pros", 400.00, 450.00, sdf.parse("2024-04-01T09:00:00"), sdf.parse("2024-04-30T21:00:00"), mainCategory1, subCategory1b, user1);
+                Lot lot26 = new Lot("Tondeuse autonome", "Tondeuse qui tond toute seule", 2000.00, 2100.00, sdf.parse("2024-05-01T09:00:00"), sdf.parse("2024-05-31T21:00:00"), mainCategory2, subCategory2b, user1);
+                Lot lot27 = new Lot("Veste Levi's", "Veste classiques et confortables", 80.00, 120.00, sdf.parse("2024-06-01T09:00:00"), sdf.parse("2024-06-30T21:00:00"), mainCategory3, subCategory3b, user1);
+                Lot lot28 = new Lot("Machine à café", "Machine pour café gourmet", 300.00, 350.00, sdf.parse("2024-07-01T09:00:00"), sdf.parse("2024-07-31T21:00:00"), mainCategory4, subCategory4a, user1);
+                Lot lot29 = new Lot("Plante décorative", "Plante d'intérieur facile d'entretien", 50.00, 100.00, sdf.parse("2024-08-01T09:00:00"), sdf.parse("2024-08-31T21:00:00"), mainCategory5, subCategory5a, user1);
+                Lot lot30 = new Lot("Casque VR", "Casque de réalité virtuelle", 600.00, 650.00, sdf.parse("2024-09-01T09:00:00"), sdf.parse("2024-09-30T21:00:00"), mainCategory6, subCategory6b, user1);
 
-                // Créer et sauvegarder des lots
-                Lot lot1 = new Lot("PC HP", "PC HP très très rapide", 1000.00, 1100.00, sdf.parse("2023-01-01T09:00:00"), sdf.parse("2023-01-01T21:00:00"), mainCategory1, subCategory1, user1);
-                Lot lot2 = new Lot("Tondeuse", "Tondeuse qui tond bien", 1500.00, 1600.00, sdf.parse("2023-01-02T09:00:00"), sdf.parse("2023-01-02T21:00:00"), mainCategory2, subCategory2, user1);
-                Lot lot3 = new Lot("Chaussures Nike", "Chaussures qui courent vite", 400.00, 450.00, sdf.parse("2023-02-04T15:00:00"), sdf.parse("2023-04-05T21:00:00"), mainCategory3, subCategory3, user1);
-                Lot lot4 = new Lot("Four intelligent", "Four qui critique vos recettes", 480.00, 530.00, sdf.parse("2023-02-04T15:00:00"), sdf.parse("2023-04-05T21:00:00"), mainCategory4, subCategory4, user1);
-                Lot lot5 = new Lot("Aspirateur automatique", "Aspirateur intelligent", 670.00, 720.00, sdf.parse("2023-02-04T15:00:00"), sdf.parse("2023-04-05T21:00:00"), mainCategory5, subCategory5, user1);
-                Lot lot6 = new Lot("Télévision 4K", "Télévision ultra haute définition", 800.00, 900.00, sdf.parse("2023-02-05T10:00:00"), sdf.parse("2023-05-05T22:00:00"), mainCategory6, subCategory6, user1);
-                Lot lot7 = new Lot("Imprimante 3D", "Imprimante 3D de haute précision", 1200.00, 1300.00, sdf.parse("2023-01-15T09:00:00"), sdf.parse("2023-02-15T21:00:00"), mainCategory1, subCategory1, user2);
-                Lot lot8 = new Lot("Robot de jardin", "Robot qui entretient le jardin", 2000.00, 2100.00, sdf.parse("2023-03-10T09:00:00"), sdf.parse("2023-04-10T21:00:00"), mainCategory2, subCategory2, user2);
-                Lot lot9 = new Lot("Veste en cuir", "Veste élégante et durable", 500.00, 550.00, sdf.parse("2023-03-20T09:00:00"), sdf.parse("2023-04-20T21:00:00"), mainCategory3, subCategory3, user2);
-                Lot lot10 = new Lot("Mixeur haute puissance", "Mixeur pour des smoothies parfaits", 150.00, 200.00, sdf.parse("2023-02-25T09:00:00"), sdf.parse("2023-03-25T21:00:00"), mainCategory4, subCategory4, user2);
-                Lot lot11 = new Lot("Canapé en cuir", "Canapé confortable et élégant", 700.00, 800.00, sdf.parse("2023-01-25T09:00:00"), sdf.parse("2023-02-25T21:00:00"), mainCategory5, subCategory5, user2);
-                Lot lot12 = new Lot("Smartphone dernier modèle", "Smartphone avec écran OLED", 1000.00, 1100.00, sdf.parse("2023-02-15T09:00:00"), sdf.parse("2023-03-15T21:00:00"), mainCategory6, subCategory6, user2);
-                Lot lot13 = new Lot("MacBook Pro", "Ordinateur portable performant", 2500.00, 2600.00, sdf.parse("2023-04-01T09:00:00"), sdf.parse("2023-04-30T21:00:00"), mainCategory1, subCategory1, user1);
-                Lot lot14 = new Lot("Tondeuse robotisée", "Tondeuse qui travaille toute seule", 1800.00, 1900.00, sdf.parse("2023-05-01T09:00:00"), sdf.parse("2023-05-31T21:00:00"), mainCategory2, subCategory2, user1);
-                Lot lot15 = new Lot("Bottes de randonnée", "Bottes pour terrains difficiles", 200.00, 250.00, sdf.parse("2023-06-01T09:00:00"), sdf.parse("2023-06-30T21:00:00"), mainCategory3, subCategory3, user1);
-                Lot lot16 = new Lot("Robot cuiseur", "Robot pour préparer des plats rapidement", 350.00, 400.00, sdf.parse("2023-07-01T09:00:00"), sdf.parse("2023-07-31T21:00:00"), mainCategory4, subCategory4, user1);
-                Lot lot17 = new Lot("Table basse en bois", "Table basse pour le salon", 150.00, 200.00, sdf.parse("2023-08-01T09:00:00"), sdf.parse("2023-08-31T21:00:00"), mainCategory5, subCategory5, user1);
-                Lot lot18 = new Lot("Caméra de surveillance", "Caméra avec vision nocturne", 300.00, 350.00, sdf.parse("2023-09-01T09:00:00"), sdf.parse("2023-09-30T21:00:00"), mainCategory6, subCategory6, user1);
-                Lot lot19 = new Lot("Ordinateur gaming", "PC pour jeux vidéo haute performance", 1500.00, 1600.00, sdf.parse("2023-10-01T09:00:00"), sdf.parse("2023-10-31T21:00:00"), mainCategory1, subCategory1, user2);
-                Lot lot20 = new Lot("Tracteur tondeuse", "Tracteur pour grand jardin", 2500.00, 2600.00, sdf.parse("2023-11-01T09:00:00"), sdf.parse("2023-11-30T21:00:00"), mainCategory2, subCategory2, user2);
-                Lot lot21 = new Lot("Montre connectée", "Montre avec suivi d'activité", 300.00, 350.00, sdf.parse("2023-12-01T09:00:00"), sdf.parse("2023-12-31T21:00:00"), mainCategory3, subCategory3, user2);
-                Lot lot22 = new Lot("Grille-pain intelligent", "Grille-pain avec commandes vocales", 100.00, 150.00, sdf.parse("2024-01-01T09:00:00"), sdf.parse("2024-01-31T21:00:00"), mainCategory4, subCategory4, user2);
-                Lot lot23 = new Lot("Lampe de chevet", "Lampe avec lumière ajustable", 50.00, 100.00, sdf.parse("2024-02-01T09:00:00"), sdf.parse("2024-02-28T21:00:00"), mainCategory5, subCategory5, user2);
-                Lot lot24 = new Lot("Appareil photo reflex", "Appareil photo pour les professionnels", 800.00, 900.00, sdf.parse("2024-03-01T09:00:00"), sdf.parse("2024-03-31T21:00:00"), mainCategory6, subCategory6, user2);
-                Lot lot25 = new Lot("Tablette graphique", "Tablette pour les dessinateurs", 400.00, 450.00, sdf.parse("2024-04-01T09:00:00"), sdf.parse("2024-04-30T21:00:00"), mainCategory1, subCategory1, user1);
-                Lot lot26 = new Lot("Drones de surveillance", "Drones pour surveillance aérienne", 2000.00, 2100.00, sdf.parse("2024-05-01T09:00:00"), sdf.parse("2024-05-31T21:00:00"), mainCategory2, subCategory2, user1);
-                Lot lot27 = new Lot("Jeans Levi's", "Jeans classiques et confortables", 80.00, 120.00, sdf.parse("2024-06-01T09:00:00"), sdf.parse("2024-06-30T21:00:00"), mainCategory3, subCategory3, user1);
-                Lot lot28 = new Lot("Machine à café", "Machine pour café gourmet", 300.00, 350.00, sdf.parse("2024-07-01T09:00:00"), sdf.parse("2024-07-31T21:00:00"), mainCategory4, subCategory4, user1);
-                Lot lot29 = new Lot("Plante décorative", "Plante d'intérieur facile d'entretien", 50.00, 100.00, sdf.parse("2024-08-01T09:00:00"), sdf.parse("2024-08-31T21:00:00"), mainCategory5, subCategory5, user1);
-                Lot lot30 = new Lot("Casque VR", "Casque de réalité virtuelle", 600.00, 650.00, sdf.parse("2024-09-01T09:00:00"), sdf.parse("2024-09-30T21:00:00"), mainCategory6, subCategory6, user1);
 
                 log.info("Preloading " + repository.save(lot1));
                 log.info("Preloading " + repository.save(lot2));
