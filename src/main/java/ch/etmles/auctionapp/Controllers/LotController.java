@@ -12,12 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//TODO Documentation must be updated (employee !!!!)
-
 @RestController
-//TODO Crossorigin is hard coded in each controller
-
-
 public class LotController {
 
     private final LotRepository repository;
@@ -41,15 +36,15 @@ public class LotController {
         return repository.save(newLot);
     }
 
-    @GetMapping("/lots/{id}")
-    Lot one(@PathVariable Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new LotNotFoundException(id));
+    @GetMapping("/lots/{articleNumber}")
+    Lot one(@PathVariable int articleNumber){
+        return repository.findByArticleNumber(articleNumber)
+                .orElseThrow(() -> new LotNotFoundException(articleNumber));
     }
 
-    @PutMapping("/lots/{id}")
-    Lot replaceLot(@RequestBody Lot newLot, @PathVariable Long id) {
-        return repository.findById(id)
+    @PutMapping("/lots/{articleNumber}")
+    Lot replaceLot(@RequestBody Lot newLot, @PathVariable int articleNumber) {
+        return repository.findByArticleNumber(articleNumber)
                 .map(lot -> {
                     lot.setName(newLot.getName());
                     lot.setDescription(newLot.getDescription());
@@ -57,14 +52,16 @@ public class LotController {
                     return repository.save(lot);
                 })
                 .orElseGet(() -> {
-                    newLot.setId(id);
+                    newLot.setArticleNumber(articleNumber);
                     return repository.save(newLot);
                 });
     }
 
-    @DeleteMapping("/lots/{id}")
-    void deleteLot(@PathVariable Long id){
-        repository.deleteById(id);
+    @DeleteMapping("/lots/{articleNumber}")
+    void deleteLot(@PathVariable int articleNumber){
+        Lot lot = repository.findByArticleNumber(articleNumber)
+                .orElseThrow(() -> new LotNotFoundException(articleNumber));
+        repository.delete(lot);
     }
 
     @GetMapping("/lots/category/{categoryId}")
@@ -79,16 +76,16 @@ public class LotController {
         return repository.findBySubCategory_Id(subCategoryId);
     }
 
-    @PutMapping("/lots/{id}/bid")
-    public ResponseEntity<String> placeBid(@PathVariable Long id, @RequestBody Double bidAmount) {
-        return repository.findById(id)
+    @PutMapping("/lots/{articleNumber}/bid")
+    public ResponseEntity<String> placeBid(@PathVariable int articleNumber, @RequestBody Double bidAmount) {
+        return repository.findByArticleNumber(articleNumber)
                 .map(lot -> {
                     if (bidAmount > lot.getActualPrice()) {
                         lot.setActualPrice(bidAmount);
                         repository.save(lot);
                         return ResponseEntity.ok("Enchère effectuée avec succès");
                     } else {
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le prix de votre enchère doit etre plus élevé que le prix actuel");
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le prix de votre enchère doit être plus élevé que le prix actuel");
                     }
                 })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lot non trouvé"));

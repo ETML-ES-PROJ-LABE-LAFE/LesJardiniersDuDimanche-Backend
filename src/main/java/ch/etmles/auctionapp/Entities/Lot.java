@@ -18,6 +18,7 @@ public class Lot {
     private Date startingDateHours;
     @Temporal(TemporalType.TIMESTAMP)
     private Date endingDateHours;
+    private int articleNumber;
 
     @ManyToOne
     private Category category;
@@ -29,7 +30,7 @@ public class Lot {
 
     public Lot() {}
 
-    public Lot(String nom, String description, Double prixDepart, Double actualPrice, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory, User user) {
+    public Lot(String nom, String description, Double prixDepart, Double actualPrice, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory, User user, int articleNumber) {
         this.setName(nom);
         this.setDescription(description);
         this.setStartingPrice(prixDepart);
@@ -39,6 +40,7 @@ public class Lot {
         this.setSubCategory(subcategory);
         this.setActualPrice(actualPrice);
         this.setUser(user);
+        this.setArticleNumber(articleNumber);
     }
 
     // Getter and setter methods
@@ -123,6 +125,14 @@ public class Lot {
         this.user = user;
     }
 
+    public int getArticleNumber() {
+        return articleNumber;
+    }
+
+    public void setArticleNumber(int articleNumber) {
+        this.articleNumber = articleNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -131,12 +141,12 @@ public class Lot {
                 && Objects.equals(description, lot.description) && Objects.equals(startingPrice, lot.startingPrice)
                 && Objects.equals(startingDateHours, lot.startingDateHours) && Objects.equals(endingDateHours, lot.endingDateHours)
                 && Objects.equals(category, lot.category) && Objects.equals(subCategory, lot.subCategory)
-                && Objects.equals(user, lot.user);
+                && Objects.equals(user, lot.user) && articleNumber == lot.articleNumber;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, startingPrice, startingDateHours, endingDateHours, category, subCategory, user);
+        return Objects.hash(id, name, description, startingPrice, startingDateHours, endingDateHours, category, subCategory, user, articleNumber);
     }
 
     @Override
@@ -152,6 +162,7 @@ public class Lot {
                 ", category=" + category +
                 ", subCategory=" + subCategory +
                 ", user=" + user +
+                ", ArticleNumber=" + articleNumber +
                 '}';
     }
 }
