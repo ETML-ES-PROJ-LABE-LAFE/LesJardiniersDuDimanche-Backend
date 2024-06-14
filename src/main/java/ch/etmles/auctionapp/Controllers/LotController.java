@@ -27,7 +27,7 @@ public class LotController {
 
     @GetMapping("/lots")
     List<Lot> all(){
-        System.out.println("Test");
+        //TODO remove this ! The console.log
         return repository.findAll();
     }
 
