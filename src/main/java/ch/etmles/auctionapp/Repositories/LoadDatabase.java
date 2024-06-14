@@ -13,10 +13,12 @@ import org.springframework.context.annotation.Configuration;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Configuration
 public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+    private static final AtomicInteger imageCounter = new AtomicInteger(1000);
 
     @Bean
     CommandLineRunner initDatabase(LotRepository repository, CategoryRepository categoryRepository, UserRepository userRepository, StateRepository stateRepository) {
@@ -24,6 +26,9 @@ public class LoadDatabase {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
             try {
+
+                // Lien vers le serveur d'images
+                String imgServer = "https://s3.us-west-2.amazonaws.com/les-jardiniers-du-dimanche.etml.es/";
 
                 // Créer et sauvegarder des utilisateurs
                 User user1 = new User("Evan Pineau", "john.doe@example.com", new BigDecimal("100.00"));

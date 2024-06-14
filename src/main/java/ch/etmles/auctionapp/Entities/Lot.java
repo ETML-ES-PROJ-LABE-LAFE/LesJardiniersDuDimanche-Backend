@@ -15,6 +15,7 @@ public class Lot {
     private String description;
     private Double startingPrice;
     private Double actualPrice;
+    private String img;
     @Temporal(TemporalType.TIMESTAMP)
     private Date startingDateHours;
     @Temporal(TemporalType.TIMESTAMP)
@@ -87,16 +88,16 @@ public class Lot {
         return startingPrice;
     }
 
-    public void setStartingPrice(Double startingPrice) {
-        this.startingPrice = startingPrice;
+    public void setActualPrice(Double actualPrice) {
+        this.actualPrice = actualPrice;
     }
 
     public Double getActualPrice() {
         return actualPrice;
     }
 
-    public void setActualPrice(Double actualPrice) {
-        this.actualPrice = actualPrice;
+    public void setStartingPrice(Double startingPrice) {
+        this.startingPrice = startingPrice;
     }
 
     public Date getStartingDateHours() {
