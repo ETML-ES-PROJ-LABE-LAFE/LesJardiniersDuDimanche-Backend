@@ -1,6 +1,14 @@
 # AuctionApp - Backend
 
+//TODO Le but est de favoriser la collaboration. Le readme doit permettre à un développeur de préparer son environnement et de savoir comment s'intégrer à votre équipe.
+
+//TODO Sans le [template livré](https://github.com/NGY-TEMPLATE/MASTER-README) il va vous être difficile de produire le document que j'attends.
+
+
 ## Description
+
+//TODO Le but de cette description est de décrire l'objectif de l'application. Il faut avoir une orientation métier en rédigeant cela.
+
 Ce projet est une application Web en Java Spring Boot qui fournit une API RESTful afin de gérer la vente d'enchères.
 
 L'application inclut les fonctionnalités suivantes :
@@ -11,6 +19,9 @@ L'application inclut les fonctionnalités suivantes :
 - Initialisation d'utilisateurs tests. 
 
 ## Structure des Fichiers
+
+//TODO tree /f. Ainsi vous aurez la structure "visuelle" et vous n'aurez plus qu'à commenter le schéma.
+
 Le projet est composé des fichiers suivants :
 
 ### Configuration
@@ -47,9 +58,14 @@ Le projet est composé des fichiers suivants :
 - **application.properties** : Fichier de configuration pour l'application Spring Boot.
 
 ## Comment Exécuter
+
+//TODO Il est important de ne livrer que l'essentiel. L'url est déjà présent. Ne le répétez pas.
+//TODO Nous avons besoin de savoir comment l'exécuter pour le dév, mais aussi pour le déploiement en prod.
+
 1. Clonez le dépôt.
    ```sh
    git clone [URL du dépôt]
+
 2. Assurez-vous d'avoir Java et Maven installés.
    Téléchargez Maven à partir de ce lien :
    ```sh
