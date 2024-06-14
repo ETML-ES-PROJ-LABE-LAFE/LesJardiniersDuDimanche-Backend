@@ -1,12 +1,18 @@
 package ch.etmles.auctionapp.Entities;
 
+import ch.etmles.auctionapp.Services.StateService;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 public class Lot {
+
+    @Transient
+    private static StateService stateService;
 
     @Id
     @GeneratedValue
@@ -39,11 +45,22 @@ public class Lot {
             this.articleNumber = COUNTER.incrementAndGet();
         }
         if (this.state == null) {
-            this.state = new State("En Cours"); // Vous devrez peut-être ajuster cela pour obtenir l'état "En Cours" depuis la base de données.
+            this.state = getStateService().getStateEnCours();
         }
     }
 
     public Lot() {}
+
+    public static void setStateService(StateService stateService) {
+        Lot.stateService = stateService;
+    }
+
+    private static StateService getStateService() {
+        if (stateService == null) {
+            throw new IllegalStateException("StateService has not been set");
+        }
+        return stateService;
+    }
 
     public Lot(String name, String description, Double startingPrice, Double actualPrice, Date startingDateHours, Date endingDateHours, Category category, Category subCategory, User user, State state) {
         this.name = name;
