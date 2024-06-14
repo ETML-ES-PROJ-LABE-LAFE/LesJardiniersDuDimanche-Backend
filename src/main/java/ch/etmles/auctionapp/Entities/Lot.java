@@ -3,6 +3,7 @@ package ch.etmles.auctionapp.Entities;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 public class Lot {
@@ -28,9 +29,18 @@ public class Lot {
     @ManyToOne
     private User user;
 
+    private static final AtomicInteger COUNTER = new AtomicInteger(1000);
+
+
+    @PrePersist
+    private void ensureArticleNumber() {
+        if (this.articleNumber == 0) {
+            this.articleNumber = COUNTER.incrementAndGet();
+        }
+    }
     public Lot() {}
 
-    public Lot(String nom, String description, Double prixDepart, Double actualPrice, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory, User user, int articleNumber) {
+    public Lot(String nom, String description, Double prixDepart, Double actualPrice, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory, User user) {
         this.setName(nom);
         this.setDescription(description);
         this.setStartingPrice(prixDepart);
@@ -40,7 +50,6 @@ public class Lot {
         this.setSubCategory(subcategory);
         this.setActualPrice(actualPrice);
         this.setUser(user);
-        this.setArticleNumber(articleNumber);
     }
 
     // Getter and setter methods
