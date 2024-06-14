@@ -15,6 +15,7 @@ public class Lot {
     private String description;
     private Double startingPrice;
     private Double actualPrice;
+    private String img;
     @Temporal(TemporalType.TIMESTAMP)
     private Date startingDateHours;
     @Temporal(TemporalType.TIMESTAMP)
@@ -40,7 +41,7 @@ public class Lot {
     }
     public Lot() {}
 
-    public Lot(String nom, String description, Double prixDepart, Double actualPrice, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory, User user) {
+    public Lot(String nom, String description, Double prixDepart, Double actualPrice, Date dateHeureDebut, Date dateHeureFin, Category category, Category subcategory, User user, String img) {
         this.setName(nom);
         this.setDescription(description);
         this.setStartingPrice(prixDepart);
@@ -50,6 +51,8 @@ public class Lot {
         this.setSubCategory(subcategory);
         this.setActualPrice(actualPrice);
         this.setUser(user);
+        this.setImg(img);
+
     }
 
     // Getter and setter methods
@@ -140,6 +143,14 @@ public class Lot {
 
     public void setArticleNumber(int articleNumber) {
         this.articleNumber = articleNumber;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     @Override
