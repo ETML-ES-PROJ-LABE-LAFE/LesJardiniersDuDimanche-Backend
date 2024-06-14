@@ -2,9 +2,11 @@ package ch.etmles.auctionapp.Controllers;
 
 import ch.etmles.auctionapp.Entities.Category;
 import ch.etmles.auctionapp.Entities.Lot;
+import ch.etmles.auctionapp.Entities.State;
 import ch.etmles.auctionapp.Entities.User;
 import ch.etmles.auctionapp.Repositories.CategoryRepository;
 import ch.etmles.auctionapp.Repositories.LotRepository;
+import ch.etmles.auctionapp.Repositories.StateRepository;
 import ch.etmles.auctionapp.Repositories.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,13 @@ public class LotController {
     private final LotRepository repository;
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
+    private final StateRepository stateRepository;
 
-    LotController(LotRepository repository, CategoryRepository categoryRepository, UserRepository userRepository){
+    LotController(LotRepository repository, CategoryRepository categoryRepository, UserRepository userRepository, StateRepository stateRepository){
         this.repository = repository;
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
+        this.stateRepository = stateRepository;
     }
 
     @GetMapping("/lots")
@@ -100,5 +104,23 @@ public class LotController {
                     return new ResponseEntity<>(lots, HttpStatus.OK);
                 })
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PutMapping("/lots/{articleNumber}/endbit")
+    public ResponseEntity<String> cloturerLot(@PathVariable int articleNumber) {
+        System.out.println("Requête pour clôturer le lot avec le numéro d'article : " + articleNumber);
+        return repository.findByArticleNumber(articleNumber)
+                .map(lot -> {
+                    State stateTermine = stateRepository.findByStateName("Terminé")
+                            .orElseThrow(() -> new RuntimeException("State 'Terminé' not found"));
+                    lot.setState(stateTermine);
+                    repository.save(lot);
+                    System.out.println("Lot clôturé avec succès : " + lot);
+                    return ResponseEntity.ok("Lot clôturé avec succès");
+                })
+                .orElseGet(() -> {
+                    System.out.println("Lot non trouvé pour le numéro d'article : " + articleNumber);
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lot non trouvé");
+                });
     }
 }
