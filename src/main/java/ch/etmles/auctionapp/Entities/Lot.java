@@ -62,7 +62,7 @@ public class Lot {
         return stateService;
     }
 
-    public Lot(String name, String description, Double startingPrice, Double actualPrice, Date startingDateHours, Date endingDateHours, Category category, Category subCategory, User user, State state) {
+    public Lot(String name, String description, Double startingPrice, Double actualPrice, Date startingDateHours, Date endingDateHours, Category category, Category subCategory, User user, State state, String img) {
         this.name = name;
         this.description = description;
         this.startingPrice = startingPrice;
@@ -73,6 +73,7 @@ public class Lot {
         this.subCategory = subCategory;
         this.user = user;
         this.state = state;
+        this.img = img;
     }
 
     // Getter and setter methods
@@ -171,6 +172,14 @@ public class Lot {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     @Override
