@@ -110,7 +110,7 @@ public class LotController {
         System.out.println("Requête pour clôturer le lot avec le numéro d'article : " + articleNumber);
         return repository.findByArticleNumber(articleNumber)
                 .map(lot -> {
-                    State stateTermine = stateRepository.findByStateName("Finish")
+                    State stateTermine = stateRepository.findByStateName("Terminé")
                             .orElseThrow(() -> new RuntimeException("State 'Finish' not found"));
                     lot.setState(stateTermine);
                     repository.save(lot);

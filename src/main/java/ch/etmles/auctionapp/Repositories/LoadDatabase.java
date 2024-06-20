@@ -140,9 +140,9 @@ public class LoadDatabase {
                 for (User user : users) {
                     List<Lot> userLots = repository.findByUser(user);
                     StringBuilder lotsInfo = new StringBuilder();
-                    lotsInfo.append("Lots pour ").append(user.getName()).append(": {");
+                    lotsInfo.append("Lots for ").append(user.getName()).append(": {");
                     for (Lot lot : userLots) {
-                        lotsInfo.append("ID=").append(lot.getId()).append(", Nom=").append(lot.getName()).append("; ");
+                        lotsInfo.append("ID=").append(lot.getId()).append(", Name=").append(lot.getName()).append("; ");
                     }
                     lotsInfo.append("}");
                     log.info(lotsInfo.toString());
