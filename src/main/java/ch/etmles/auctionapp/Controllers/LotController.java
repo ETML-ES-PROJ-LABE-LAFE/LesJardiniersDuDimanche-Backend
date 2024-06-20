@@ -87,12 +87,12 @@ public class LotController {
                     if (bidAmount > lot.getActualPrice()) {
                         lot.setActualPrice(bidAmount);
                         repository.save(lot);
-                        return ResponseEntity.ok("Enchère effectuée avec succès");
+                        return ResponseEntity.ok("Auction Successful");
                     } else {
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le prix de votre enchère doit être plus élevé que le prix actuel");
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Your bid price must be higher than the current price");
                     }
                 })
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lot non trouvé"));
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lot not found"));
     }
 
     @GetMapping("/lots/seller/{userId}")
@@ -100,7 +100,6 @@ public class LotController {
         return userRepository.findById(userId)
                 .map(user -> {
                     List<Lot> lots = repository.findByUser(user);
-                    System.out.println("Lots for user " + user.getName() + ": " + lots);
                     return new ResponseEntity<>(lots, HttpStatus.OK);
                 })
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -111,16 +110,15 @@ public class LotController {
         System.out.println("Requête pour clôturer le lot avec le numéro d'article : " + articleNumber);
         return repository.findByArticleNumber(articleNumber)
                 .map(lot -> {
-                    State stateTermine = stateRepository.findByStateName("Terminé")
-                            .orElseThrow(() -> new RuntimeException("State 'Terminé' not found"));
+                    State stateTermine = stateRepository.findByStateName("Finish")
+                            .orElseThrow(() -> new RuntimeException("State 'Finish' not found"));
                     lot.setState(stateTermine);
                     repository.save(lot);
-                    System.out.println("Lot clôturé avec succès : " + lot);
-                    return ResponseEntity.ok("Lot clôturé avec succès");
+                    return ResponseEntity.ok("Lot successfully closed");
                 })
                 .orElseGet(() -> {
-                    System.out.println("Lot non trouvé pour le numéro d'article : " + articleNumber);
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lot non trouvé");
+                    System.out.println("Lot not found for item number : " + articleNumber);
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lot not found");
                 });
     }
 }

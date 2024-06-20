@@ -28,14 +28,13 @@ public class LoadDatabase {
 
             try {
 
-                // Créer et sauvegarder des utilisateurs
                 User user1 = new User("Evan Pineau", "john.doe@example.com", new BigDecimal("100.00"));
                 User user2 = new User("Max Verstappen", "max.verstappen@example.com", new BigDecimal("150.00"));
 
                 log.info("Preloading " + userRepository.save(user1));
                 log.info("Preloading " + userRepository.save(user2));
 
-                // Créer et sauvegarder des catégories
+
                 Category mainCategory1 = categoryRepository.save(new Category("Informatique", null));
                 Category subCategory1a = categoryRepository.save(new Category("Ordinateur", mainCategory1));
                 Category subCategory1b = categoryRepository.save(new Category("Imprimante", mainCategory1));
@@ -60,7 +59,6 @@ public class LoadDatabase {
                 Category subCategory6a = categoryRepository.save(new Category("Télévision", mainCategory6));
                 Category subCategory6b = categoryRepository.save(new Category("Smartphones", mainCategory6));
 
-                // Créer et sauvegarder des états
                 State stateEnCours = new State("En Cours");
                 State stateTermine = new State("Terminé");
                 State statePaiement = new State("En cours de paiement");
@@ -69,7 +67,6 @@ public class LoadDatabase {
                 log.info("Preloading " + stateRepository.save(stateEnCours));
                 log.info("Preloading " + stateRepository.save(stateTermine));
 
-                // Créer et sauvegarder des lots
                 Lot lot1 = new Lot("PC HP", "PC HP très très rapide", 1000.00, 1100.00, sdf.parse("2023-01-01T09:00:00"), sdf.parse("2023-01-01T21:00:00"), mainCategory1, subCategory1a, user1, stateEnCours,s3BucketUrl + "1001.jpg" );
                 Lot lot2 = new Lot("Tondeuse", "Tondeuse qui tond bien", 1500.00, 1600.00, sdf.parse("2023-01-02T09:00:00"), sdf.parse("2023-01-02T21:00:00"), mainCategory2, subCategory2a, user1, stateEnCours,s3BucketUrl + "1002.jpg");
                 Lot lot3 = new Lot("Chaussures Nike", "Chaussures qui courent vite", 400.00, 450.00, sdf.parse("2023-02-04T15:00:00"), sdf.parse("2023-04-05T21:00:00"), mainCategory3, subCategory3a, user1, stateEnCours,s3BucketUrl + "1003.jpg");
@@ -139,7 +136,6 @@ public class LoadDatabase {
                 log.info("Preloading " + repository.save(lot29));
                 log.info("Preloading " + repository.save(lot30));
 
-                // Lots list by Seller
                 List<User> users = userRepository.findAll();
                 for (User user : users) {
                     List<Lot> userLots = repository.findByUser(user);

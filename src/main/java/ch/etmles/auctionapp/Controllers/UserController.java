@@ -27,7 +27,7 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<User> newUser(@RequestBody User newUser) {
         if (userRepository.findByEmail(newUser.getEmail()).isPresent()) {
-            throw new UserAlreadyExistsException("Un utilisateur avec cet email existe déjà.");
+            throw new UserAlreadyExistsException("A user with this email address already exists.");
         }
         User savedUser = userRepository.save(newUser);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
