@@ -1,87 +1,86 @@
 # AuctionApp - Backend
 
-//TODO Le but est de favoriser la collaboration. Le readme doit permettre à un développeur de préparer son environnement et de savoir comment s'intégrer à votre équipe.
+//TODO The goal is to promote collaboration. The readme should enable a developer to set up their environment and know how to integrate with your team.
 
-//TODO Sans le [template livré](https://github.com/NGY-TEMPLATE/MASTER-README) il va vous être difficile de produire le document que j'attends.
+//TODO Without the provided template it will be difficult for you to produce the document I expect.
 
 
 ## Description
 
-//TODO Le but de cette description est de décrire l'objectif de l'application. Il faut avoir une orientation métier en rédigeant cela.
+//TODO The purpose of this description is to describe the application's objective. It should have a business-oriented focus.
 
-Ce projet est une application Web en Java Spring Boot qui fournit une API RESTful afin de gérer la vente d'enchères.
+This project is a Java Spring Boot web application that provides a RESTful API to manage auction sales.
 
-L'application inclut les fonctionnalités suivantes :
+The application includes the following features:
 
-- Opérations CRUD pour les catégories et les lots
-- Gestion des exceptions pour les entités non trouvées
-- Chargement initial des données
-- Initialisation d'utilisateurs tests. 
+- CRUD operations for categories and lots
+- Exception management for entities not found
+- Initial data loading
+- Initialization of test users
 
-## Structure des Fichiers
+## File Structure
+//TODO tree /f. This will give you the "visual" structure and you will just need to comment on the diagram.
 
-//TODO tree /f. Ainsi vous aurez la structure "visuelle" et vous n'aurez plus qu'à commenter le schéma.
-
-Le projet est composé des fichiers suivants :
+The project is composed of the following files:
 
 ### Configuration
-- **CorsConfig.java** : Configuration CORS pour permettre les requêtes cross-origin.
+- **CorsConfig.java** : CORS configuration to allow cross-origin requests.
 
-### Contrôleurs
-- **CategoryController.java** : Gère les requêtes HTTP pour les catégories.
-- **LotController.java** : Gère les requêtes HTTP pour les lots.
-- **UserController.java** : Gère les requêtes HTTP pour les utilisateurs.
+### Controllers
+- **CategoryController.java** : Manages HTTP requests for categories.
+- **LotController.java** : Manages HTTP requests for lots.
+- **UserController.java** : Manages HTTP requests for users.
 
-### Modèles
-- **Category.java** : Représente l'entité Catégorie.
-- **Lot.java** : Représente l'entité Lot.
-- **User.java** : Représente l'entité Utilisateur.
+### Models
+- **Category.java** : Represents the Category entity.
+- **Lot.java** : Represents the Lot entity.
+- **User.java** : Represents the User entity.
 
-### Répertoires
-- **CategoryRepository.java** : Interface pour l'accès aux données des catégories.
-- **LotRepository.java** : Interface pour l'accès aux données des lots.
-- **UserRepository.java** : Interface pour l'accès aux données des utilisateurs.
-- **LoadDatabase.java** : Classe pour charger les données initiales dans la base de données.
+### Repositories
+- **CategoryRepository.java** : Interface for category data access.
+- **LotRepository.java** : Interface for lot data access.
+- **UserRepository.java** : Interface for user data access.
+- **LoadDatabase.java** : Class to load initial data into the database.
 
 ### Exceptions
-- **CategoryNotFoundException.java** : Exception personnalisée pour catégorie non trouvée.
-- **LotNotFoundException.java** : Exception personnalisée pour lot non trouvé.
-- **UserNotFoundException.java** : Exception personnalisée pour utilisateur non trouvé.
+- **CategoryNotFoundException.java** : Custom exception for category not found.
+- **LotNotFoundException.java** :  Custom exception for lot not found.
+- **UserNotFoundException.java** : Custom exception for user not found.
 
-### Conseils
-- **LotNotFoundAdvice.java** : Gestionnaire d'exception pour LotNotFoundException.
+### Advices
+- **LotNotFoundAdvice.java** : Exception handler for LotNotFoundException.
 
-### Application Principale
-- **AuctionApp.java** : Classe principale pour démarrer l'application Spring Boot.
+### Main application
+- **AuctionApp.java** : Main class to start the Spring Boot application.
 
-### Configuration de l'application
-- **application.properties** : Fichier de configuration pour l'application Spring Boot.
+### Application configuration
+- **application.properties** : Configuration file for the Spring Boot application.
 
-## Comment Exécuter
+## How to run
 
-//TODO Il est important de ne livrer que l'essentiel. L'url est déjà présent. Ne le répétez pas.
-//TODO Nous avons besoin de savoir comment l'exécuter pour le dév, mais aussi pour le déploiement en prod.
+//TODO It's important to deliver only the essentials. The URL is already present. Don't repeat it.
+//TODO We need to know how to run it for development, but also for production deployment.
 
-1. Clonez le dépôt.
+1. Clone the repository.
    ```sh
    git clone [URL du dépôt]
 
-2. Assurez-vous d'avoir Java et Maven installés.
-   Téléchargez Maven à partir de ce lien :
+2. Ensure you have Java and Maven installed.
+   Download Maven from this link:
    ```sh
    https://maven.apache.org/download.cgi 
    
-3. Décompressez le fichier téléchargé à l'emplacement souhaité. 
-   Ajoutez le chemin bin de Maven aux variables d'environnement. Par exemple :
+3. Unzip the downloaded file to your desired location.
+   Add the Maven bin path to your environment variables. For example:
    ```sh
    C:\Program Files\apache-maven-3.8.6\bin
 3. Naviguez jusqu'au répertoire du projet
    ```sh
    cd [nom_du_répertoire choisi]
-4. Exécutez l'application AuctionApp avec la commande suivante :
+4. Navigate to the project directory
    ```sh
    mvn spring-boot:run
-5. Lancer le projet BackEnd avant le projet FrontEnd afin de faire venir les données 
+5. Run the AuctionApp application with the following command:
    ```sh
    run AuctionApp
    
