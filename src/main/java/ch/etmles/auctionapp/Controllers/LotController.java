@@ -107,7 +107,6 @@ public class LotController {
 
     @PutMapping("/lots/{articleNumber}/endbit")
     public ResponseEntity<String> cloturerLot(@PathVariable int articleNumber) {
-        System.out.println("Requête pour clôturer le lot avec le numéro d'article : " + articleNumber);
         return repository.findByArticleNumber(articleNumber)
                 .map(lot -> {
                     State stateTermine = stateRepository.findByStateName("Terminé")
