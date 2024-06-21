@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ch.etml-es</groupId>
-	<artifactId>payroll</artifactId>
+	<artifactId>auctionapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>payroll</name>
 	<description>Training depot for Spring</description>
@@ -25,7 +25,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>

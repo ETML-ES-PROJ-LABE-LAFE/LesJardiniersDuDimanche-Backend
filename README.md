@@ -1,38 +1,86 @@
-# Exam
+# AuctionApp - Backend
 
-This repository has been created to assess students' skills on Spring.
+//TODO The goal is to promote collaboration. The readme should enable a developer to set up their environment and know how to integrate with your team.
 
-## First build
+//TODO Without the provided template it will be difficult for you to produce the document I expect.
 
-After cloning this repository, run this command:
 
-```
-   mvn clean spring-boot:run
-```
+## Description
 
-to retrieve the dependencies, compile and run the program for the first time.
+//TODO The purpose of this description is to describe the application's objective. It should have a business-oriented focus.
 
-```
-  [...]
-  2024-04-09T21:27:27.338+02:00  INFO 21340 --- [payroll] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-  2024-04-09T21:27:27.517+02:00  WARN 21340 --- [payroll] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be per
-  formed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-  2024-04-09T21:27:27.752+02:00  INFO 21340 --- [payroll] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-  2024-04-09T21:27:27.760+02:00  INFO 21340 --- [payroll] [           main] ch.etmles.payroll.PayrollApplication     : Started PayrollApplication in 2.972 seconds (process running for 3.247)
-  2024-04-09T21:27:27.802+02:00  INFO 21340 --- [payroll] [           main] c.e.payroll.Repositories.LoadDatabase    : Preloading Employee{id=1, name='Bilbo Baggins', role='burglar'}
-  2024-04-09T21:27:27.803+02:00  INFO 21340 --- [payroll] [           main] c.e.payroll.Repositories.LoadDatabase    : Preloading Employee{id=2, name='Frodo Baggins', role='thief'}
-  [...]
-```
+This project is a Java Spring Boot web application that provides a RESTful API to manage auction sales.
 
-## Test using http requests
+The application includes the following features:
 
-Got the file [project]\src\main\java\ch\etmles\payroll\Controllers\EmployeeController.java
+- CRUD operations for categories and lots
+- Exception management for entities not found
+- Initial data loading
+- Initialization of test users
 
-Before all routes methods, you will find a curl sample.
+## File Structure
+//TODO tree /f. This will give you the "visual" structure and you will just need to comment on the diagram.
 
-## Backlog
+The project is composed of the following files:
 
-Read the different issues.
+### Configuration
+- **CorsConfig.java** : CORS configuration to allow cross-origin requests.
 
-[Issues](https://github.com/ETML-ES-FWBE/exam/issues)
+### Controllers
+- **CategoryController.java** : Manages HTTP requests for categories.
+- **LotController.java** : Manages HTTP requests for lots.
+- **UserController.java** : Manages HTTP requests for users.
 
+### Models
+- **Category.java** : Represents the Category entity.
+- **Lot.java** : Represents the Lot entity.
+- **User.java** : Represents the User entity.
+
+### Repositories
+- **CategoryRepository.java** : Interface for category data access.
+- **LotRepository.java** : Interface for lot data access.
+- **UserRepository.java** : Interface for user data access.
+- **LoadDatabase.java** : Class to load initial data into the database.
+
+### Exceptions
+- **CategoryNotFoundException.java** : Custom exception for category not found.
+- **LotNotFoundException.java** :  Custom exception for lot not found.
+- **UserNotFoundException.java** : Custom exception for user not found.
+
+### Advices
+- **LotNotFoundAdvice.java** : Exception handler for LotNotFoundException.
+
+### Main application
+- **AuctionApp.java** : Main class to start the Spring Boot application.
+
+### Application configuration
+- **application.properties** : Configuration file for the Spring Boot application.
+
+## How to run
+
+//TODO It's important to deliver only the essentials. The URL is already present. Don't repeat it.
+//TODO We need to know how to run it for development, but also for production deployment.
+
+1. Clone the repository.
+   ```sh
+   git clone [URL du dépôt]
+
+2. Ensure you have Java and Maven installed.
+   Download Maven from this link:
+   ```sh
+   https://maven.apache.org/download.cgi 
+   
+3. Unzip the downloaded file to your desired location.
+   Add the Maven bin path to your environment variables. For example:
+   ```sh
+   C:\Program Files\apache-maven-3.8.6\bin
+3. Naviguez jusqu'au répertoire du projet
+   ```sh
+   cd [nom_du_répertoire choisi]
+4. Navigate to the project directory
+   ```sh
+   mvn spring-boot:run
+5. Run the AuctionApp application with the following command:
+   ```sh
+   run AuctionApp
+   
